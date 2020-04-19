@@ -32,7 +32,7 @@ const tileData = [
 
 export default function App() {
 
-  const theme = React.useMemo(() =>
+  const theme =
       createMuiTheme({
         palette: {
           type: 'light',
@@ -45,8 +45,7 @@ export default function App() {
             contrastText: '#202020',
           },
         },
-      })
-  );
+      });
 
   return (
     <ThemeProvider theme={theme}>

@@ -4,7 +4,6 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
@@ -20,66 +19,80 @@ export default function FormDialog() {
     setOpen(false);
   };
 
+  const handleSubmit = () => {
+
+  }
+
   if (open === false) {
     return (<button className="bigBtn" onClick={handleClickOpen}>Collaborate</button>);
   }
 
   return (
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <form action="/api/contactus" method="POST">
         <DialogTitle id="form-dialog-title">Collaborate With Us</DialogTitle>
         <DialogContent className='intakeForm'>
-          <DialogContentText></DialogContentText>
-
           <TextField
+            fullWidth
             autoFocus
-            id="idea"
-            label="What do you have in mind?"
-            type="textarea"
-            multiline
-            rows="3"
-            fullWidth
-          />
-
-          <TextField
-            id="idea"
-            fullWidth
-            label="MVP Budget"
-            helperText="Baseline budget to build your minimum viable product"
-            type="number"
-            InputProps={{endAdornment:<InputAdornment position="end">$</InputAdornment>}}
-          />
-          <TextField
-            id="idea"
-            fullWidth
-            label="Ideal Budget"
-            helperText="Ideal budget to build your full vision"
-            type="number"
-            InputProps={{endAdornment:<InputAdornment position="end">$</InputAdornment>}}
-          />
-
-          <TextField
-            id="idea"
-            label={<span>How do you imagine we can help you?</span>}
-            type="textarea"
-            multiline
-            rows="3"
-            fullWidth
-          />
-
-          <TextField
-            fullWidth
             label="Your name"
+            name="full_name"
             autoComplete='true'
-            id="name"
-
-            type="email"
+            type="text"
           />
           <TextField
             fullWidth
             autoComplete='true'
-            id="email"
+            name="mail"
+            className="mt-2"
             label='Your email'
             type="email"
+          />
+
+          <TextField
+            label="What do you have in mind?"
+            name="field_body"
+            type="textarea"
+            multiline
+            rows="3"
+            className="mt-5"
+            fullWidth
+            helperText="Tell us a bit about your idea"
+          />
+
+
+          <div className="row">
+            <div className="col-6">
+            <TextField
+              name="fiel_budget_min"
+              fullWidth
+              label="MVP Budget"
+              helperText="Baseline budget to build your minimum viable product"
+              type="number"
+              className="mt-5"
+              InputProps={{endAdornment:<InputAdornment position="end">$</InputAdornment>}}
+            />
+            </div>
+            <div className="col-6">
+            <TextField
+              fullWidth
+              label="Ideal Budget"
+              name="field_budget_max"
+              helperText="Ideal budget to build your full vision"
+              type="number"
+              className="mt-5"
+              InputProps={{endAdornment:<InputAdornment position="end">$</InputAdornment>}}
+            />
+            </div>
+          </div>
+          <TextField
+            label={<span>In what areas of your project are you looking to collaborate?</span>}
+            type="textarea"
+            multiline
+            name="field_needs"
+            rows="3"
+            className="mt-5"
+            fullWidth
           />
 
         </DialogContent>
@@ -87,10 +100,11 @@ export default function FormDialog() {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary" variant="contained">
+          <Button type="submit" onClick={handleSubmit} color="primary" variant="contained">
             Submit
           </Button>
         </DialogActions>
+        </form>
       </Dialog>
   );
 }

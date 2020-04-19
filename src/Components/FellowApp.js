@@ -47,6 +47,10 @@ export default function FellowApp(props) {
     return (<span><sup>$</sup>{value}</span>);
   }
 
+  const handleSubmit = () => {
+
+  }
+
   return (
       <div className="container-fluid p-0">
         <div className={classes.appBar}>
@@ -61,18 +65,18 @@ export default function FellowApp(props) {
             </div>
             <div className="col-md-6">
               <h2 className={classes.subheader}>Our Mission</h2>
-              <p style={{fontStyle:'italic'}}><strong>Our mission</strong> is to develop products and solutions for our community, through sharing hands, minds, hearts and resources.</p>
+              <p style={{fontStyle:'italic'}}><strong>Our mission</strong> is to enrich our community, through sharing hands, minds, hearts and resources.</p>
 
               <h2 className={classes.subheader}>Your Benefits</h2>
               <p>Fellows live at <a href="https://kapunahale.com" target="_blank" rel="noopener noreferrer"  >Kapuna Hale</a> while Work Studiers may come to use workspaces as needed from sunrise to sundown</p>
               <p>Both of you share access to it's <strong>6 acres</strong> and <strong>tools</strong>, <strong>workspaces</strong>, and <strong>mentors</strong>.</p>
               <p>The following organizations and individuals have offered their time and support to help make your initiative a success. </p>
               <p>Please include in your application how you might want to leverage any of their skills or resources.</p>
-              <p>After your tenure you may continue to use the tools and workspaces from your iniitiative assuming good standing</p>
+              <p>After your tenure you may continue to use and profit from the tools and workspaces created during your iniitiative so long as you remain in good standing with Kapuna Hale</p>
             </div>
           </div>
 
-          <h4 className='text-center mt-5 mb-5'>[your name / logo here]</h4>
+          <h4 className='text-center mt-5 mb-5'>[mentor names / logos here]</h4>
 
           <div className="row">
             <div className="col-md-6">
@@ -93,8 +97,8 @@ export default function FellowApp(props) {
             </div>
           </div>
 
-          <form className={classes.appForm + " container-fluid p-0 mt-5"}>
-          <div className="d-flex flex-wrap mb-4">
+          <form action="/api/fellowapp" method="POST" className={classes.appForm + " container-fluid p-0 mt-5"}>
+          <div className="d-flex flex-wrap mb-5">
             <h2>Application</h2>
             <span style={{flexGrow:1}}></span>
             <FormControlLabel
@@ -113,6 +117,28 @@ export default function FellowApp(props) {
             />
           </div>
 
+
+            <div className='row mt-5 mb-5'>
+              <div className='col-6'>
+              <TextField
+                className='col-md-5 mr-md-1 col-12'
+                label='Your full name'
+                autoComplete='true'
+                name='full_name'
+                type='email'
+              />
+              </div>
+              <div className='col-6'>
+              <TextField
+                className='col-md-6 ml-md-1 col-12'
+                autoComplete='true'
+                name='mail'
+                label='Your email'
+                type='email'
+              />
+              </div>
+            </div>
+
           <InitiativeSelector onChange={initiativeChange} tileData={props.tileData} />
 
            <div className={classes.appSlider}>
@@ -122,6 +148,7 @@ export default function FellowApp(props) {
               valueLabelFormat={valueLabelFormat}
               onChange={handleBudgetChange}
               aria-labelledby='months needed'
+              name="field_budget"
               step={500}
               marks
               min={500}
@@ -136,6 +163,7 @@ export default function FellowApp(props) {
               value={months}
               onChange={handleMonthChange}
               aria-labelledby='months'
+              name="field_months"
               step={1}
               marks
               min={1}
@@ -149,7 +177,7 @@ export default function FellowApp(props) {
           : ''}
 
           <TextField
-            id='appIdea'
+            id='field_body'
             label={<span className={classes.placeholder}>How would you spend {months > 1 ? months + ' months' : months + ' month'} living rent-free with a ${budget} project budget at <a href="https://kapunahale.com" target="_blank" rel="noopener noreferrer" >Kapuna Hale</a> ?</span>}
             helperText={ idea.length > 0 ? (4000 - idea.length) + ' / 4000 characters allowed ' : '200 - 4000 characters.' }
             disabled={Object.keys(initiatives).length > 0}
@@ -159,14 +187,14 @@ export default function FellowApp(props) {
             multiline
             rows='4'
             fullWidth
-            className="mb-4"
+            style={{margin:'65px 0 40px 0'}}
           />
 
-          <FormControl fullWidth>
+          <FormControl fullWidth className="mt-4">
             <InputLabel id="when2start">Select when you'd like to start</InputLabel>
             <Select
               labelId="when2start"
-              id="when2start"
+              name="field_period"
               label='Start Timeframe'
               value={startDate}
               onChange={handleStartChange} >
@@ -177,26 +205,8 @@ export default function FellowApp(props) {
           <FormHelperText>All dates depend on us all clear of Covid-19</FormHelperText>
         </FormControl>
 
-
-          <div className='row m-auto mt-5'>
-            <TextField
-              className='col-md-5 mr-md-1 col-12'
-              label='Your full name'
-              autoComplete='true'
-              id='name'
-              type='email'
-            />
-            <TextField
-              className='col-md-6 ml-md-1 col-12'
-              autoComplete='true'
-              id='email'
-              label='Your email'
-              type='email'
-            />
-          </div>
-
           <div className="row text-right w-100 mt-5 mb-5">
-            <Button color='primary' variant='contained' disabled={(Object.keys(initiatives).length > 0) ? false : true}>
+            <Button color='primary' type="submit" onClick={handleSubmit} variant='contained' disabled={(Object.keys(initiatives).length > 0) ? false : true}>
               Submit
             </Button>
           </div>
@@ -227,7 +237,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appSlider : {
     textAlign:'right',
-    margin:'25px 0'
+    margin:'65px 0 0 0'
   },
   sliderLabel : {
     marginBottom:0

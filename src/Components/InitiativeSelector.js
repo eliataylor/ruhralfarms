@@ -67,7 +67,7 @@ export default function InitiativeSelector(props) {
       <div>
           <div className={classes.rootList}>
           <label className={classes.placeholder} >What initiatives do you want to work on? Select 1, 2 or 3. &nbsp; &nbsp; <small onClick={handleClickOpen}><u>expand all</u></small></label>
-          <GridList className={classes.gridList} cols={window.innerWidth > 600 ? 4.5 : 2.5}>
+          <GridList className={classes.gridList} cols={window.innerWidth > 900 ? 4.5 : 2.5}>
             {props.tileData.map(tile => (
                   <GridListTile
                     key={tile.img}
