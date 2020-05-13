@@ -46,11 +46,11 @@ class Home extends React.Component {
               <Grid container spacing={1} alignItems='center' style={{marginBottom:40}} >
                   <Grid item sm={12} >
                       <p className={classes.lineEmoji}>We follow the
-                          <a href='https://en.wikipedia.org/wiki/Systems_development_life_cycle' target='_blank'>
+                          <a href='https://en.wikipedia.org/wiki/Systems_development_life_cycle' target='_blank' rel="noopener noreferrer" >
                           <img alt='sdlc' src="/images/sdlc-a.png" style={{height:20}} />
                           </a>
                           <strong>Software Development Life Cycle</strong> at the pace of the <strong>24 Hour News Cycle</strong>
-                          <a href='https://en.wikipedia.org/wiki/24-hour_news_cycle' target='_blank'>
+                          <a href='https://en.wikipedia.org/wiki/24-hour_news_cycle' target='_blank' rel="noopener noreferrer" >
                           <img alt='24 hours news' src="/images/24hournews.png" style={{height:20}} />
                           </a>
                           by balancing traditional and adaptive strategies in product development &amp; marketing.</p>

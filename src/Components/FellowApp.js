@@ -68,7 +68,7 @@ export default function FellowApp(props) {
     const obj = {
       "mail": mail,
       "name": fullname,
-      "field_type": this.state.housing,
+      "field_type": housing,
       "field_initiatives": initiatives,
       "field_budget": budget,
       "field_duration": months,
@@ -238,9 +238,9 @@ export default function FellowApp(props) {
 
                 <TextField
                     id='field_body'
-                    label={<span  className={(Object.keys(initiatives).length > 0) ? classes.placeholder : classes.disabled}>How would you spend this {months > 1 ? months + ' months' : months + ' month'} and ${budget}?</span>}
+                    label={<span className={(Object.keys(initiatives).length > 0) ? classes.placeholder : classes.disabled}>How would you spend this {months > 1 ? months + ' months' : months + ' month'} and ${budget}?</span>}
                     helperText={idea.length > 0 ? (4000 - idea.length) + ' / 4000 characters allowed ' : '200 - 4000 characters.'}
-                    disabled={(Object.keys(initiatives).length > 0) ? false : true}
+                    disabled={(Object.keys(initiatives).length === 0)}
                     type='textarea'
                     value={idea}
                     onChange={handleIdeaChange}
@@ -252,7 +252,7 @@ export default function FellowApp(props) {
 
                 <Grid item>
                   <Button color='primary' type="submit" onClick={handleSubmit} variant='contained'
-                          disabled={(Object.keys(initiatives).length > 0) ? false : true}>
+                          disabled={(Object.keys(initiatives).length === 0)}>
                     Submit
                   </Button>
                 </Grid>

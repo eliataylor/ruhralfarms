@@ -26,7 +26,7 @@ export default function InitiativeSelector(props) {
 
   function toggleItem(e) {
     var copy = {...initiatives};
-    var id = e.currentTarget.getAttribute('data-initiatve');
+    var id = e.currentTarget.getAttribute('data-initiative');
     if (typeof initiatives[id] !== 'undefined') {
       delete copy[id];
       setInitiatives(copy);
@@ -35,6 +35,7 @@ export default function InitiativeSelector(props) {
       copy[id] = true;
       setInitiatives(copy);
     }
+    props.onChange(copy);
   }
 
   const selectedRows = props.tileData.map(tile => {
@@ -66,7 +67,7 @@ export default function InitiativeSelector(props) {
                   <GridListTile
                     key={tile.img}
                     className={classes.skillBlockBtn}
-                    data-initiatve={tile.title}
+                    data-initiative={tile.title}
                     onClick={toggleItem}
                     >
                     <img src={tile.img} alt={tile.title} />
@@ -94,7 +95,7 @@ export default function InitiativeSelector(props) {
               <GridListTile
                 key={tile.img}
                 className={'col-lg-2 col-md-3 col-sm-4 col-6 '  + classes.skillBlockBtn}
-                data-initiatve={tile.title}
+                data-initiative={tile.title}
                 onClick={toggleItem}
                 >
                 <img src={tile.img} alt={tile.title} />
