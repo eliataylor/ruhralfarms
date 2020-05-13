@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InitiativeSelector from './InitiativeSelector';
 import { Link } from "react-router-dom";
@@ -21,6 +21,11 @@ axios.defaults.headers.common['Accept'] = 'application/json';
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 export default function FellowApp(props) {
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const classes = useStyles();
   const [budget, setBudget] = React.useState(500);
   const [months, setMonths] = React.useState(1);
@@ -89,7 +94,7 @@ export default function FellowApp(props) {
           <Link to="/"><img src='/icon.png' className="float-right" alt="logo" height='40'/></Link>
         </div>
         <Grid container className='container' style={{maxWidth:800}}>
-          <h1 className={classes.h1}>Red Dirt <span style={{fontSize: '50%', display: 'block'}}>Work Studies &amp; Fellowships</span></h1>
+          <h1 className={classes.h1}>Red Dirt <span style={{fontSize: '50%', display: 'block'}}>Coworkers</span></h1>
           <p><b>Red Dirt is our way of building a collective farm and collabortive workspace through sweat equity and communal investments.</b></p>
 
           <Grid container className='intakeForm'>
@@ -104,13 +109,12 @@ export default function FellowApp(props) {
                 <p>We pledge $5,000 for 2020 and $10,000 for 2021 to invest in projects with shared benefits for you and our home. Want a mobile fruit stand for farmers markets? A pottery wheel and kiln? A 26" portal sawmill? So do we!</p>
                 <p>Propose your project. If we can fund it, we will; and share all tools and produce in turn.</p>
                 <h2 className={classes.subheader}>Your Benefits</h2>
-                <p>Fellows live at <a href="https://kapunahale.com" target="_blank" rel="noopener noreferrer">Kapuna
-                  Hale</a> while Work Studiers may come to use workspaces as needed from sunrise to sundown.</p>
-                <p>Both of you share access to it's <strong>6
-                  acres</strong> and <strong>tools</strong>, <strong>workspaces</strong>, and <strong>mentors</strong>.
+                <p>You may apply to live at <a href="https://kapunahale.com" target="_blank" rel="noopener noreferrer">Kapuna
+                  Hale</a> or just come to use workspaces as needed from sunrise to sundown.</p>
+                <p>Eitherway you gain access to it's <strong>6
+                  acres</strong>, <strong>tools</strong>, <strong>workspaces</strong>, and <strong>mentors</strong> and your awarded budget.
                 </p>
-                <p>After your tenure you may continue to use and profit from the tools and workspaces created during
-                  your initiative, so long as you remain in good standing with Kapuna Hale.</p>
+                <p>After your tenure you may continue to use and profit from the tools and workspaces created during your initiative.</p>
                 <p>The following organizations and individuals have offered their time and support to help make your
                   initiative a success.</p>
                 <p>Please include in your application how you might want to leverage any of their skills or
@@ -150,7 +154,7 @@ export default function FellowApp(props) {
                         value="fellowship"
                         required={true}
                         control={<Checkbox color="primary"/>}
-                        label="Fellowship"
+                        label="I need housing"
                         labelPlacement="end" />
                   </Grid>
                   <Grid item>
@@ -158,7 +162,7 @@ export default function FellowApp(props) {
                         value="workstudy"
                         required={true}
                         control={<Checkbox color="primary"/>}
-                        label="Work Study"
+                        label="I live nearby"
                         labelPlacement="start" />
                   </Grid>
                 </Grid>
@@ -203,7 +207,7 @@ export default function FellowApp(props) {
 
                 <InitiativeSelector onChange={initiativeChange} tileData={props.tileData}/>
 
-                <div className={classes.appSlider}>
+                <Grid item className={classes.appSlider}>
                   <label className={classes.sliderLabel}>What is the baseline budget to achieve your initiative?</label>
                   <Slider
                       value={budget}
@@ -217,9 +221,9 @@ export default function FellowApp(props) {
                       max={5000}
                       valueLabelDisplay='on'
                   />
-                </div>
+                </Grid>
 
-                <div className={classes.appSlider}>
+                <Grid item className={classes.appSlider}>
                   <label className={classes.sliderLabel}>How many months do you need to achieve your initiative?</label>
                   <Slider
                       value={months}
@@ -232,7 +236,7 @@ export default function FellowApp(props) {
                       max={12}
                       valueLabelDisplay='on'
                   />
-                </div>
+                </Grid>
 
                 <TextField
                     id='field_body'
@@ -248,12 +252,12 @@ export default function FellowApp(props) {
                     style={{margin: '65px 0 40px 0'}}
                 />
 
-                <div className="row text-right w-100 mt-5 mb-5">
+                <Grid item>
                   <Button color='primary' type="submit" onClick={handleSubmit} variant='contained'
                           disabled={(Object.keys(initiatives).length > 0) ? false : true}>
                     Submit
                   </Button>
-                </div>
+                </Grid>
             </form>
           </Grid>
         </Grid>

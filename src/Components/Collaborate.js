@@ -139,13 +139,14 @@ class Collaborate extends React.Component {
               </div>
             </div>
             <TextField
-                label={<span>In what areas of your project are you looking to collaborate?</span>}
+                label={<span>How can <em>we</em> help?</span>}
                 type="textarea"
                 multiline
                 name="field_description"
                 rows="3"
                 className="mt-5"
                 fullWidth
+                helperText='In what areas of your project are you looking to collaborate'
                 value={this.state.field_description}
                 onChange={this.handleChange}
             />

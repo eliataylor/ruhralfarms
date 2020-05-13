@@ -63,11 +63,11 @@ export default function ApplyNow(props) {
 
   return (
       <Dialog open={open} onClose={handleClose} aria-labelledby='form-dialog-title'>
-        <DialogTitle id='form-dialog-title'>Red Dirt Fellowships</DialogTitle>
+        <DialogTitle id='form-dialog-title'>Red Dirt Coworkers</DialogTitle>
         <DialogContent className='intakeForm'>
           <p style={{fontStyle:'italic'}}>Our mission is to build a community workspace to create products, spaces and solutions for our community through sharing tools, hands, minds, and resources. </p>
           <p>To fullfill this mission we initialize are priortizing applications which can leave tools or facilities at Kapuna Hale for you, future fellows and our community to use.</p>
-          <p>During your fellowship you will live at Kapuna Hale and have access to it's 6 acres and all tools, workspaces, and expertise we have. Additionally the following organizations and individuals have offered their support to help make your initiative a success. Please include in your application how you might want to leverage their skills or resources.</p>
+          <p>During your co-working at Kapuna Hale you have access to it's 6 acres and all tools, workspaces, and expertise we have. Additionally the following organizations and individuals have offered their support to help make your initiative a success. Please include in your application how you might want to leverage their skills or resources.</p>
           <p>[your name / logo here]</p>
 
           <div className='mb-4 mt-3' >

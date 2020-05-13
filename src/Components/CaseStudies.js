@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import {Link} from "react-router-dom";
-import '../bootstrap.scss';
+// import '../bootstrap.scss';
 // import Button from '@material-ui/core/Button';
 
 class CaseStudies extends Component {
