@@ -41,6 +41,7 @@ export default function InitiativeSelector(props) {
     if (typeof initiatives[tile.title] !== 'undefined') {
       return (
         <CardHeader
+                key={tile.img}
                 className={classes.cardHeader}
                 avatar={<Avatar src={tile.img} variant='rounded' />}
                 title={
@@ -59,7 +60,7 @@ export default function InitiativeSelector(props) {
     return (
       <div>
           <div className={classes.rootList}>
-          <label className={classes.placeholder} >What initiatives do you want to work on? Select 1, 2 or 3. &nbsp; &nbsp; <small onClick={handleClickOpen}><u>expand all</u></small></label>
+          <label className={classes.placeholder} >What do you want to work on? <small>(3 max)</small> &nbsp; &nbsp; <small onClick={handleClickOpen}><u>expand all</u></small></label>
           <GridList className={classes.gridList} cols={window.innerWidth > 900 ? 4.5 : 2.5}>
             {props.tileData.map(tile => (
                   <GridListTile

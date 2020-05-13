@@ -87,7 +87,7 @@ class Home extends React.Component {
 
               </Grid>
 
-              <Grid container spacing={1} alignItems='center'>
+              <Grid container spacing={1} alignItems='flex-start'>
                   <Grid item xs={6} sm={3} >
                       <a rel="noopener noreferrer" href="http://sammietaylor.com/case-studies/farm-fresh"
                          target="_blank">
@@ -118,6 +118,7 @@ class Home extends React.Component {
           <Grid container direction={'column'} className='container' id="workspaces">
                       <div onClick={this.scrollTo} href='#home' className='backToTop'>back to top</div>
                       <h1 className='ideaTitle'>OUR WORKSPACES</h1>
+                      <p>We welcome hosting side-by-side work sprints at our workspaces, and we love a good excuse to travel.</p>
                       <Grid container spacing={1} style={{marginTop:40}}>
                           <Grid item xs={12} sm={4}>
                               <h3 style={{margin:0}}>Oakland, California</h3>
@@ -158,7 +159,7 @@ class Home extends React.Component {
                           <Grid item xs={6}>
                               <img src='/images/sammie-smiles.jpg' className='img-fluid' alt='sammie'/>
                           </Grid>
-                          <Grid item xs={6}>
+                          <Grid item xs={6} >
                               Sammie has lead brands and teams throughout the fashion and beauty industries in business development, digital marketing, graphic and
                               UI design. Review more of her work at <a
                               target="_blank" rel="noopener noreferrer" href="https://sammietaylor.com">SammieTaylor.com</a>
@@ -166,7 +167,7 @@ class Home extends React.Component {
                       </Grid>
 
                       <Grid container spacing={1} style={{marginTop: 30}}>
-                          <Grid item xs={6}>
+                          <Grid item xs={6} >
                               Eli is a full stack developer with 15 years of experience across a wide variety of
                               technologies. Review more of his work at <a target="_blank" rel="noopener noreferrer"
                                                                           href="https://taylormadetraffic.com">TaylorMadeTraffic.com</a>
@@ -192,6 +193,7 @@ class Home extends React.Component {
                           <Grid item xs={12} md={6}>
                               <h2 className='ideaTitle'>Red Dirt Coworkers</h2>
                               <p>Red Dirt is our way of building a collective farm and collabortive workspace through sweat equity and communal investments.</p>
+                              <p>If you recently graduated 4 years of high school on Hawaii with a 2.5 GPA or above, <Link to="/red-dirt-coworkers" >apply now</Link>.</p>
                           </Grid>
                       </Grid>
                       <Grid container wrap='wrap-reverse' spacing={1}>

@@ -6,15 +6,6 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Home from './Components/Home';
 import FellowApp from './Components/FellowApp';
 
-const mentorData = [
-  {
-    img:"",
-    logo:"",
-    name:"",
-    desc:""
-  }
-]
-
 const tileData = [
   {
     img: 'http://kapunahale.com/wwwroot/photos/projects/20170528_111110_300x300.jpg',

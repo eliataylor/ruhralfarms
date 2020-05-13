@@ -4,14 +4,13 @@ import InitiativeSelector from './InitiativeSelector';
 import { Link } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
 import Slider from '@material-ui/core/Slider';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
+import Mentors from "./Mentors";
 import OverlayLoader from "./OverlayLoader";
 const axios = require('axios').default;
 axios.defaults.headers.common['crossDomain'] = true;
@@ -19,6 +18,7 @@ axios.defaults.headers.common['async'] = true;
 axios.defaults.headers.common['timeout'] = process.env.NODE_ENV === 'production' ? 30 : 0; // for debugging with php breakpoints
 axios.defaults.headers.common['Accept'] = 'application/json';
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+
 
 export default function FellowApp(props) {
 
@@ -34,6 +34,7 @@ export default function FellowApp(props) {
   const [startDate, setStartDate] = React.useState('');
   const [fullname, setName] = React.useState('');
   const [mail, setEmail] = React.useState('');
+  const [housing, setHousingType] = React.useState('');
   const [isLoading, setLoading] = React.useState(false);
 
   const handleBudgetChange = (event, newValue) => {
@@ -67,7 +68,7 @@ export default function FellowApp(props) {
     const obj = {
       "mail": mail,
       "name": fullname,
-      "field_type": ["work_study", "fellowship"],
+      "field_type": this.state.housing,
       "field_initiatives": initiatives,
       "field_budget": budget,
       "field_duration": months,
@@ -95,7 +96,7 @@ export default function FellowApp(props) {
         </div>
         <Grid container className='container' style={{maxWidth:800}}>
           <h1 className={classes.h1}>Red Dirt <span style={{fontSize: '50%', display: 'block'}}>Coworkers</span></h1>
-          <p><b>Red Dirt is our way of building a collective farm and collabortive workspace through sweat equity and communal investments.</b></p>
+          <p><b>Red Dirt is our way of building a collective farm and collaborative workspace through sweat equity and communal investments.</b></p>
 
           <Grid container className='intakeForm'>
             <Grid container justify='space-between' spacing={2}>
@@ -111,27 +112,26 @@ export default function FellowApp(props) {
                 <h2 className={classes.subheader}>Your Benefits</h2>
                 <p>You may apply to live at <a href="https://kapunahale.com" target="_blank" rel="noopener noreferrer">Kapuna
                   Hale</a> or just come to use workspaces as needed from sunrise to sundown.</p>
-                <p>Eitherway you gain access to it's <strong>6
+                <p>Either way you gain access to it's <strong>6
                   acres</strong>, <strong>tools</strong>, <strong>workspaces</strong>, and <strong>mentors</strong> and your awarded budget.
                 </p>
-                <p>After your tenure you may continue to use and profit from the tools and workspaces created during your initiative.</p>
-                <p>The following organizations and individuals have offered their time and support to help make your
-                  initiative a success.</p>
-                <p>Please include in your application how you might want to leverage any of their skills or
-                  resources.</p>
+                <p>After your tenure you may continue to <strong>use and profit</strong> from the tools and workspaces created during your initiative.</p>
+                <p>The following organizations have offered their time and support to help make your initiative a success. Click the logos to read more about their mentors</p>
               </Grid>
             </Grid>
 
-            <Grid container className='text-center mt-5 mb-5'><h3>[mentor names / logos]</h3></Grid>
+            <Grid container style={{margin:'30px 0 40px 0'}}>
+              <Mentors />
+            </Grid>
 
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
                 <h2 className={classes.subheader} style={{textAlign: 'left'}}>Minimum Qualifications</h2>
                 <p>On your first day...</p>
                 <ul>
-                  <li>You will be over 18 and under 23 years old</li>
+                  <li>You will be over 18 and under 22 years old</li>
                   <li>You will have attended all four years of High School in Hawaii</li>
-                  <li>You will have a High School Diploma with at least a 2.5 culvimative GPA over any two years</li>
+                  <li>You will have a High School Diploma with at least a 2.5 cumulative GPA over any two years</li>
                 </ul>
               </Grid>
               <Grid item xs={12} md={6}>
@@ -146,24 +146,21 @@ export default function FellowApp(props) {
             </Grid>
 
             <form action="https://portal.ruhralfarms.com/application/new" method="POST" className={classes.appForm + " container-fluid p-0 mt-5"} >
-                <Grid container alignContent='center'>
-                  <Grid item><h2>Application</h2></Grid>
-                  <Grid item style={{flexGrow: 1}}></Grid>
-                  <Grid item>
-                    <FormControlLabel
-                        value="fellowship"
-                        required={true}
-                        control={<Checkbox color="primary"/>}
-                        label="I need housing"
-                        labelPlacement="end" />
-                  </Grid>
-                  <Grid item>
-                    <FormControlLabel
-                        value="workstudy"
-                        required={true}
-                        control={<Checkbox color="primary"/>}
-                        label="I live nearby"
-                        labelPlacement="start" />
+                <Grid container alignContent='flex-start'>
+                  <Grid item xs={7} md={8}><h2>Application</h2></Grid>
+                  <Grid item xs={5} md={4}>
+                    <FormControl fullWidth style={{marginTop:0}}>
+                      <InputLabel id="housing">Housing Preference</InputLabel>
+                      <Select
+                          fullWidth
+                          id="housing"
+                          name="field_type"
+                          value={housing}
+                          onChange={e => setHousingType(e.currentTarget.value)} >
+                        <option value=''>No Preference</option>
+                        <option value='fellow'>Live at Kapuna Hale while co-working</option>
+                      </Select>
+                    </FormControl>
                   </Grid>
                 </Grid>
 
@@ -186,14 +183,15 @@ export default function FellowApp(props) {
                         type='email'
                     />
                   </Grid>
-                  <Grid item xs={4}>
+                  <Grid item xs={12} md={4}>
                     <FormControl fullWidth className="mt-4">
                       <InputLabel id="when2start">Select when you'd like to start</InputLabel>
                       <Select
-                          labelId="when2start"
+                          id="when2start"
                           name="field_period"
                           label='Start Timeframe'
                           value={startDate}
+                          fullWidth
                           onChange={handleStartChange}>
                         <option value={'2020-10'}>Oct 2020</option>
                         <option value={'2020-11'}>Nov 2020</option>
