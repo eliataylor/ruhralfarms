@@ -1,3 +1,13 @@
+body {
+  margin: 0;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
 .App {
   min-height: 100vh;
   display: flex;
@@ -35,7 +45,7 @@ section.page {
 }
 
 .generalInfo {
-  font-size:22px;
+  font-size:20px;
 }
 .partImg {
   max-height: 80px;
@@ -45,6 +55,7 @@ section.page {
   font-size: 12px;
   width:100%;
   border-bottom:1px solid rgba(32, 32, 32, 1);
+  cursor: pointer;
 }
 h3 {
   font-size:20px;
@@ -120,10 +131,22 @@ dd {
   border-bottom: 1px solid #333;
 }
 
+.sqBlock {
+  display:inline-block;
+  padding:0;
+  margin:0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height:370px;
+  overflow: hidden;
+}
+
 .sqCta {
   display:inline-block;
   text-align: center;
-  min-height:100px; height:20vh; width:100%;
+  min-height:100px; height:25vh; width:100%;
   font-weight: 800;
   color:#fff;
   background-repeat: no-repeat;

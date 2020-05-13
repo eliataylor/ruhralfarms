@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+*.psd
+*.ai
+
 private.md
 
 /public/images/baks

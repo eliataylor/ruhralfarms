@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "node-sass": "^4.13.1",
     "react": "^16.13.1",
@@ -16,7 +17,8 @@
     "react-scripts": "3.4.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "prestart": "(cat ruhralfarms.crt ruhralfarms.key > ./node_modules/webpack-dev-server/ssl/server.pem) || :",
+    "start": "HOST=localhost.ruhralfarms.com HTTPS=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

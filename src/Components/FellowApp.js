@@ -6,12 +6,19 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-
+import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
 import Slider from '@material-ui/core/Slider';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
+import OverlayLoader from "./OverlayLoader";
+const axios = require('axios').default;
+axios.defaults.headers.common['crossDomain'] = true;
+axios.defaults.headers.common['async'] = true;
+axios.defaults.headers.common['timeout'] = process.env.NODE_ENV === 'production' ? 30 : 0; // for debugging with php breakpoints
+axios.defaults.headers.common['Accept'] = 'application/json';
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 export default function FellowApp(props) {
   const classes = useStyles();
@@ -19,9 +26,10 @@ export default function FellowApp(props) {
   const [months, setMonths] = React.useState(1);
   const [idea, setIdea] = React.useState('');
   const [initiatives, setInitiatives] = React.useState({});
-  const [startDate, setStartDate] = React.useState('Q4-2020');
-
-  const ratio = budget / months;
+  const [startDate, setStartDate] = React.useState('');
+  const [fullname, setName] = React.useState('');
+  const [mail, setEmail] = React.useState('');
+  const [isLoading, setLoading] = React.useState(false);
 
   const handleBudgetChange = (event, newValue) => {
     setBudget(newValue);
@@ -47,173 +55,209 @@ export default function FellowApp(props) {
     return (<span><sup>$</sup>{value}</span>);
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
 
+    const obj = {
+      "mail": mail,
+      "name": fullname,
+      "field_type": ["work_study", "fellowship"],
+      "field_initiatives": initiatives,
+      "field_budget": budget,
+      "field_duration": months,
+      "field_description": idea
+    };
+
+    axios.post('https://portal.ruhralfarms.com/application/new?_format=json', obj)
+        .then(function (response) {
+          console.log(response);
+          setLoading(false);
+        })
+        .catch(function (error) {
+          console.log(error);
+          setLoading(false);
+        });
+
+    return false;
   }
 
   return (
-      <div className="container-fluid p-0">
+      <Grid container direction='column'>
+        {isLoading === true ? <OverlayLoader/> : ''}
         <div className={classes.appBar}>
-          <Link to="/"><img src='/icon.png' className="float-right" alt="logo" height='40' /></Link>
+          <Link to="/"><img src='/icon.png' className="float-right" alt="logo" height='40'/></Link>
         </div>
-        <div className="container">
-        <h1 className={classes.h1}>Red Dirt <span style={{fontSize:'50%', display:'block'}}>Work Studies &amp; Fellowships</span></h1>
-        <div className='intakeForm'>
-          <div className="row">
-            <div className="col-md-6">
-              <img src="/images/kh-reddirt.jpg" className='img-fluid' alt='our garden'/>
-            </div>
-            <div className="col-md-6">
-              <h2 className={classes.subheader}>Our Mission</h2>
-              <p style={{fontStyle:'italic'}}><strong>Our mission</strong> is to enrich our community, through sharing hands, minds, hearts and resources.</p>
+        <Grid container className='container' style={{maxWidth:800}}>
+          <h1 className={classes.h1}>Red Dirt <span style={{fontSize: '50%', display: 'block'}}>Work Studies &amp; Fellowships</span></h1>
+          <p><b>Red Dirt is our way of building a collective farm and collabortive workspace through sweat equity and communal investments.</b></p>
 
-              <h2 className={classes.subheader}>Your Benefits</h2>
-              <p>Fellows live at <a href="https://kapunahale.com" target="_blank" rel="noopener noreferrer"  >Kapuna Hale</a> while Work Studiers may come to use workspaces as needed from sunrise to sundown</p>
-              <p>Both of you share access to it's <strong>6 acres</strong> and <strong>tools</strong>, <strong>workspaces</strong>, and <strong>mentors</strong>.</p>
-              <p>The following organizations and individuals have offered their time and support to help make your initiative a success. </p>
-              <p>Please include in your application how you might want to leverage any of their skills or resources.</p>
-              <p>After your tenure you may continue to use and profit from the tools and workspaces created during your iniitiative so long as you remain in good standing with Kapuna Hale</p>
-            </div>
-          </div>
+          <Grid container className='intakeForm'>
+            <Grid container justify='space-between' spacing={2}>
+              <Grid item xs={12} md={6}>
+                <img src="/images/kh-reddirt.jpg" className='img-fluid' alt='our garden'/>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <h2 className={classes.subheader}>Our Mission</h2>
+                <p style={{fontStyle: 'italic'}}><strong>Our mission</strong> is to enrich our community, through
+                  sharing hands, minds, hearts and resources.</p>
+                <p>We pledge $5,000 for 2020 and $10,000 for 2021 to invest in projects with shared benefits for you and our home. Want a mobile fruit stand for farmers markets? A pottery wheel and kiln? A 26" portal sawmill? So do we!</p>
+                <p>Propose your project. If we can fund it, we will; and share all tools and produce in turn.</p>
+                <h2 className={classes.subheader}>Your Benefits</h2>
+                <p>Fellows live at <a href="https://kapunahale.com" target="_blank" rel="noopener noreferrer">Kapuna
+                  Hale</a> while Work Studiers may come to use workspaces as needed from sunrise to sundown.</p>
+                <p>Both of you share access to it's <strong>6
+                  acres</strong> and <strong>tools</strong>, <strong>workspaces</strong>, and <strong>mentors</strong>.
+                </p>
+                <p>After your tenure you may continue to use and profit from the tools and workspaces created during
+                  your initiative, so long as you remain in good standing with Kapuna Hale.</p>
+                <p>The following organizations and individuals have offered their time and support to help make your
+                  initiative a success.</p>
+                <p>Please include in your application how you might want to leverage any of their skills or
+                  resources.</p>
+              </Grid>
+            </Grid>
 
-          <h4 className='text-center mt-5 mb-5'>[mentor names / logos here]</h4>
+            <Grid container className='text-center mt-5 mb-5'><h3>[mentor names / logos]</h3></Grid>
 
-          <div className="row">
-            <div className="col-md-6">
-              <h2 className={classes.subheader} style={{textAlign:'left'}}>Minimum Qualifications</h2>
-              <p>On your first day...</p>
-              <ul>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={6}>
+                <h2 className={classes.subheader} style={{textAlign: 'left'}}>Minimum Qualifications</h2>
+                <p>On your first day...</p>
+                <ul>
                   <li>You will be over 18 and under 23 years old</li>
                   <li>You will have attended all four years of High School in Hawaii</li>
                   <li>You will have a High School Diploma with at least a 2.5 culvimative GPA over any two years</li>
-              </ul>
-            </div>
-            <div className="col-md-6">
-              <h2 className={classes.subheader} >Mutual Expectations</h2>
-              <p>Once we come to an understanding and agreement for your initiative, we will sign a contract for you meeting your own monthly milestones towards completing your initiative.</p>
-              <p>Your enrollment and residence, as well as your continued access after, is contingent on meeting these milestones.</p>
-              <p>You are free to seek or hold employment and encouraged to stay active outside of your initiative through fitness and fun.</p>
-              <p><b>Red Dirt is a way to build a collective farm and collabortive workspace through sweat equity and communal investments</b></p>
-            </div>
-          </div>
+                </ul>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <h2 className={classes.subheader}>Mutual Expectations</h2>
+                <p>Once we come to an understanding and agreement for your initiative, we will sign a contract for you
+                  meeting your own monthly milestones towards completing your initiative.</p>
+                <p>Your enrollment and residence, as well as your continued access after, is contingent on meeting these
+                  milestones.</p>
+                <p>You are free to seek or hold employment and encouraged to stay active outside of your initiative
+                  through fitness and fun.</p>
+              </Grid>
+            </Grid>
 
-          <form action="/api/fellowapp" method="POST" className={classes.appForm + " container-fluid p-0 mt-5"}>
-          <div className="d-flex flex-wrap mb-5">
-            <h2>Application</h2>
-            <span style={{flexGrow:1}}></span>
-            <FormControlLabel
-              value="fellowship"
-              required={true}
-              control={<Checkbox color="primary" />}
-              label="Fellowship"
-              labelPlacement="end"
-            />
-            <FormControlLabel
-              value="workstudy"
-              required={true}
-              control={<Checkbox color="primary" />}
-              label="Work Study"
-              labelPlacement="start"
-            />
-          </div>
+            <form action="https://portal.ruhralfarms.com/application/new" method="POST" className={classes.appForm + " container-fluid p-0 mt-5"} >
+                <Grid container alignContent='center'>
+                  <Grid item><h2>Application</h2></Grid>
+                  <Grid item style={{flexGrow: 1}}></Grid>
+                  <Grid item>
+                    <FormControlLabel
+                        value="fellowship"
+                        required={true}
+                        control={<Checkbox color="primary"/>}
+                        label="Fellowship"
+                        labelPlacement="end" />
+                  </Grid>
+                  <Grid item>
+                    <FormControlLabel
+                        value="workstudy"
+                        required={true}
+                        control={<Checkbox color="primary"/>}
+                        label="Work Study"
+                        labelPlacement="start" />
+                  </Grid>
+                </Grid>
 
+                <Grid container justify='space-between' spacing={1} alignItems='center' style={{marginBottom:40}}>
+                  <Grid item xs={4}>
+                    <TextField
+                        label='Your full name'
+                        autoComplete='true'
+                        name='name'
+                        onChange={e => setName(e.currentTarget.value)}
+                        type='email'
+                    />
+                  </Grid>
+                  <Grid item xs={4}>
+                    <TextField
+                        autoComplete='true'
+                        name='mail'
+                        label='Your email'
+                        onChange={e => setEmail(e.currentTarget.value)}
+                        type='email'
+                    />
+                  </Grid>
+                  <Grid item xs={4}>
+                    <FormControl fullWidth className="mt-4">
+                      <InputLabel id="when2start">Select when you'd like to start</InputLabel>
+                      <Select
+                          labelId="when2start"
+                          name="field_period"
+                          label='Start Timeframe'
+                          value={startDate}
+                          onChange={handleStartChange}>
+                        <option value={'2020-10'}>Oct 2020</option>
+                        <option value={'2020-11'}>Nov 2020</option>
+                        <option value={'2020-12'}>Dec 2020</option>
+                        <option value={'2021-12'}>Jan 2021</option>
+                      </Select>
+                      <FormHelperText>All dates depend on us all clear of Covid-19</FormHelperText>
+                    </FormControl>
+                  </Grid>
+                </Grid>
 
-            <div className='row mt-5 mb-5'>
-              <div className='col-6'>
-              <TextField
-                className='col-md-5 mr-md-1 col-12'
-                label='Your full name'
-                autoComplete='true'
-                name='full_name'
-                type='email'
-              />
-              </div>
-              <div className='col-6'>
-              <TextField
-                className='col-md-6 ml-md-1 col-12'
-                autoComplete='true'
-                name='mail'
-                label='Your email'
-                type='email'
-              />
-              </div>
-            </div>
+                <InitiativeSelector onChange={initiativeChange} tileData={props.tileData}/>
 
-          <InitiativeSelector onChange={initiativeChange} tileData={props.tileData} />
+                <div className={classes.appSlider}>
+                  <label className={classes.sliderLabel}>What is the baseline budget to achieve your initiative?</label>
+                  <Slider
+                      value={budget}
+                      valueLabelFormat={valueLabelFormat}
+                      onChange={handleBudgetChange}
+                      aria-labelledby='months needed'
+                      name="field_budget"
+                      step={500}
+                      marks
+                      min={500}
+                      max={5000}
+                      valueLabelDisplay='on'
+                  />
+                </div>
 
-           <div className={classes.appSlider}>
-            <label className={classes.sliderLabel}>What is the baseline budget to achieve your initiative?</label>
-            <Slider
-              value={budget}
-              valueLabelFormat={valueLabelFormat}
-              onChange={handleBudgetChange}
-              aria-labelledby='months needed'
-              name="field_budget"
-              step={500}
-              marks
-              min={500}
-              max={5000}
-              valueLabelDisplay='on'
-            />
-          </div>
+                <div className={classes.appSlider}>
+                  <label className={classes.sliderLabel}>How many months do you need to achieve your initiative?</label>
+                  <Slider
+                      value={months}
+                      onChange={handleMonthChange}
+                      aria-labelledby='months'
+                      name="field_months"
+                      step={1}
+                      marks
+                      min={1}
+                      max={12}
+                      valueLabelDisplay='on'
+                  />
+                </div>
 
-          <div className={classes.appSlider}>
-            <label className={classes.sliderLabel}>How many months do you need to achieve your initiative?</label>
-            <Slider
-              value={months}
-              onChange={handleMonthChange}
-              aria-labelledby='months'
-              name="field_months"
-              step={1}
-              marks
-              min={1}
-              max={12}
-              valueLabelDisplay='on'
-            />
-          </div>
+                <TextField
+                    id='field_body'
+                    label={<span  className={(Object.keys(initiatives).length > 0) ? classes.placeholder : classes.disabled}>How would you spend this {months > 1 ? months + ' months' : months + ' month'} and ${budget}?</span>}
+                    helperText={idea.length > 0 ? (4000 - idea.length) + ' / 4000 characters allowed ' : '200 - 4000 characters.'}
+                    disabled={(Object.keys(initiatives).length > 0) ? false : true}
+                    type='textarea'
+                    value={idea}
+                    onChange={handleIdeaChange}
+                    multiline
+                    rows='4'
+                    fullWidth
+                    style={{margin: '65px 0 40px 0'}}
+                />
 
-          { budget > 1300 && ratio > 800 ?
-            <small className={classes.warning + ' text-center'}>Your budget / time ratio is high. This is ok, but as our first year offering these grants, we will favor applications investing the majority of funds in tools and machinary that can continued to be used by future fellows and members.</small>
-          : ''}
-
-          <TextField
-            id='field_body'
-            label={<span className={classes.placeholder}>How would you spend {months > 1 ? months + ' months' : months + ' month'} living rent-free with a ${budget} project budget at <a href="https://kapunahale.com" target="_blank" rel="noopener noreferrer" >Kapuna Hale</a> ?</span>}
-            helperText={ idea.length > 0 ? (4000 - idea.length) + ' / 4000 characters allowed ' : '200 - 4000 characters.' }
-            disabled={Object.keys(initiatives).length > 0}
-            type='textarea'
-            value={idea}
-            onChange={handleIdeaChange}
-            multiline
-            rows='4'
-            fullWidth
-            style={{margin:'65px 0 40px 0'}}
-          />
-
-          <FormControl fullWidth className="mt-4">
-            <InputLabel id="when2start">Select when you'd like to start</InputLabel>
-            <Select
-              labelId="when2start"
-              name="field_period"
-              label='Start Timeframe'
-              value={startDate}
-              onChange={handleStartChange} >
-            <option value={'Q3-2020'}>Q3 2020</option>
-            <option value={'Q4-2020'}>Q4 2020</option>
-            <option value={'Q1-2020'}>Q1 2021</option>
-          </Select>
-          <FormHelperText>All dates depend on us all clear of Covid-19</FormHelperText>
-        </FormControl>
-
-          <div className="row text-right w-100 mt-5 mb-5">
-            <Button color='primary' type="submit" onClick={handleSubmit} variant='contained' disabled={(Object.keys(initiatives).length > 0) ? false : true}>
-              Submit
-            </Button>
-          </div>
-          </form>
-        </div>
-      </div>
-    </div>
+                <div className="row text-right w-100 mt-5 mb-5">
+                  <Button color='primary' type="submit" onClick={handleSubmit} variant='contained'
+                          disabled={(Object.keys(initiatives).length > 0) ? false : true}>
+                    Submit
+                  </Button>
+                </div>
+            </form>
+          </Grid>
+        </Grid>
+      </Grid>
   );
 }
 
@@ -222,7 +266,8 @@ const useStyles = makeStyles((theme) => ({
   h1: {
     fontWeight:800,
     borderBottom:'1px solid #202020',
-    marginBottom:40
+    marginBottom:40,
+    width:'100%'
   },
   appBar : {
     backgroundColor:'#202020',
@@ -243,13 +288,18 @@ const useStyles = makeStyles((theme) => ({
     marginBottom:0
   },
   subheader: {
+    fontSize:30,
     marginBottom:0,
     fontWeight:800,
     borderBottom:'1px solid #202020'
   },
   placeholder : {
     color:'#202020',
-    fontWeight:600
+    fontWeight:500
+  },
+  disabled : {
+    color:'rgba(0, 0, 0, 0.38)',
+    fontWeight:500
   },
   dtImg : {
     height:70,
@@ -262,5 +312,4 @@ const useStyles = makeStyles((theme) => ({
   warning : {
     color:'red'
   }
-
 }));

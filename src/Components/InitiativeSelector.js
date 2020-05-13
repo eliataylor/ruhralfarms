@@ -4,22 +4,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
 import Button from '@material-ui/core/Button';
-
-// import FormControl from '@material-ui/core/FormControl';
-// import Select from '@material-ui/core/Select';
-// import InputLabel from '@material-ui/core/InputLabel';
 import CardHeader from '@material-ui/core/CardHeader';
 import Avatar from '@material-ui/core/Avatar';
 import GridList from '@material-ui/core/GridList';
-//import ListSubheader from '@material-ui/core/ListSubheader';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 
 export default function InitiativeSelector(props) {
   const classes = useStyles();
-  // const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [initiatives, setInitiatives] = React.useState({});
 
