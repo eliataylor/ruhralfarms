@@ -7,10 +7,11 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
 import Slider from '@material-ui/core/Slider';
+import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
-import Mentors from "./Mentors";
+// import Mentors from "./Mentors";
 import OverlayLoader from "./OverlayLoader";
 const axios = require('axios').default;
 axios.defaults.headers.common['crossDomain'] = true;
@@ -22,10 +23,6 @@ axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 export default function FellowApp(props) {
 
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
-
   const classes = useStyles();
   const [budget, setBudget] = React.useState(500);
   const [months, setMonths] = React.useState(1);
@@ -36,6 +33,11 @@ export default function FellowApp(props) {
   const [mail, setEmail] = React.useState('');
   const [housing, setHousingType] = React.useState('');
   const [isLoading, setLoading] = React.useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
 
   const handleBudgetChange = (event, newValue) => {
     setBudget(newValue);
@@ -89,7 +91,7 @@ export default function FellowApp(props) {
   }
 
   return (
-      <Grid container direction='column'>
+      <Grid container direction='column' style={{marginBottom:20}}>
         {isLoading === true ? <OverlayLoader/> : ''}
         <div className={classes.appBar}>
           <Link to="/"><img src='/icon.png' className="float-right" alt="logo" height='40'/></Link>
@@ -100,10 +102,10 @@ export default function FellowApp(props) {
 
           <Grid container className='intakeForm'>
             <Grid container justify='space-between' spacing={2}>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={6} sm={4}>
                 <img src="/images/kh-reddirt.jpg" className='img-fluid' alt='our garden'/>
               </Grid>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={6} sm={8}>
                 <h2 className={classes.subheader}>Our Mission</h2>
                 <p style={{fontStyle: 'italic'}}><strong>Our mission</strong> is to enrich our community, through
                   sharing hands, minds, hearts and resources.</p>
@@ -120,9 +122,9 @@ export default function FellowApp(props) {
               </Grid>
             </Grid>
 
-            <Grid container style={{margin:'30px 0 40px 0'}}>
-              <Mentors />
-            </Grid>
+            <p style={{margin:'30px 0 40px 0', textAlign:'center', fontWeight:800, width:'100%'}}>
+              [mentor logos]
+            </p>
 
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
@@ -146,9 +148,32 @@ export default function FellowApp(props) {
             </Grid>
 
             <form action="https://portal.ruhralfarms.com/application/new" method="POST" className={classes.appForm + " container-fluid p-0 mt-5"} >
-                <Grid container alignContent='flex-start'>
-                  <Grid item xs={7} md={8}><h2>Application</h2></Grid>
-                  <Grid item xs={5} md={4}>
+                <h1>Application</h1>
+
+                <Grid container justify='space-between' spacing={1} alignItems='center' style={{marginBottom:40}}>
+                  <Grid item xs={6}>
+                    <TextField
+                        label='Your full name'
+                        autoComplete='true'
+                        name='fullname'
+                        fullWidth
+                        required={true}
+                        onChange={e => setName(e.currentTarget.value)}
+                        type='email'
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                        autoComplete='true'
+                        name='mail'
+                        fullWidth
+                        label='Your email'
+                        required={true}
+                        onChange={e => setEmail(e.currentTarget.value)}
+                        type='email'
+                    />
+                  </Grid>
+                  <Grid item xs={6} >
                     <FormControl fullWidth style={{marginTop:0}}>
                       <InputLabel id="housing">Housing Preference</InputLabel>
                       <Select
@@ -156,47 +181,27 @@ export default function FellowApp(props) {
                           id="housing"
                           name="field_type"
                           value={housing}
-                          onChange={e => setHousingType(e.currentTarget.value)} >
-                        <option value=''>No Preference</option>
-                        <option value='fellow'>Live at Kapuna Hale while co-working</option>
+                          onChange={e => setHousingType(e.target.value)} >
+                        <MenuItem value=''>No Preference</MenuItem>
+                        <MenuItem value='fellow'>Live at Kapuna Hale while co-working</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
-                </Grid>
-
-                <Grid container justify='space-between' spacing={1} alignItems='center' style={{marginBottom:40}}>
-                  <Grid item xs={4}>
-                    <TextField
-                        label='Your full name'
-                        autoComplete='true'
-                        name='name'
-                        onChange={e => setName(e.currentTarget.value)}
-                        type='email'
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <TextField
-                        autoComplete='true'
-                        name='mail'
-                        label='Your email'
-                        onChange={e => setEmail(e.currentTarget.value)}
-                        type='email'
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={4}>
+                  <Grid item xs={6} >
                     <FormControl fullWidth className="mt-4">
-                      <InputLabel id="when2start">Select when you'd like to start</InputLabel>
+                      <InputLabel id="when2start">Select when you'd like to start <sup className='isRequired'>*</sup></InputLabel>
                       <Select
                           id="when2start"
                           name="field_period"
                           label='Start Timeframe'
                           value={startDate}
+                          required={true}
                           fullWidth
                           onChange={handleStartChange}>
-                        <option value={'2020-10'}>Oct 2020</option>
-                        <option value={'2020-11'}>Nov 2020</option>
-                        <option value={'2020-12'}>Dec 2020</option>
-                        <option value={'2021-12'}>Jan 2021</option>
+                        <MenuItem value={'2020-10'}>Oct 2020</MenuItem>
+                        <MenuItem value={'2020-11'}>Nov 2020</MenuItem>
+                        <MenuItem value={'2020-12'}>Dec 2020</MenuItem>
+                        <MenuItem value={'2021-12'}>Jan 2021</MenuItem>
                       </Select>
                       <FormHelperText>All dates depend on us all clear of Covid-19</FormHelperText>
                     </FormControl>
@@ -206,7 +211,7 @@ export default function FellowApp(props) {
                 <InitiativeSelector onChange={initiativeChange} tileData={props.tileData}/>
 
                 <Grid item className={classes.appSlider}>
-                  <label className={classes.sliderLabel}>What is the baseline budget to achieve your initiative?</label>
+                  <label className={classes.sliderLabel}>What is the baseline budget to achieve your initiative? <sup className='isRequired'>*</sup></label>
                   <Slider
                       value={budget}
                       valueLabelFormat={valueLabelFormat}
@@ -215,6 +220,7 @@ export default function FellowApp(props) {
                       name="field_budget"
                       step={500}
                       marks
+                      required={true}
                       min={500}
                       max={5000}
                       valueLabelDisplay='on'
@@ -222,7 +228,7 @@ export default function FellowApp(props) {
                 </Grid>
 
                 <Grid item className={classes.appSlider}>
-                  <label className={classes.sliderLabel}>How many months do you need to achieve your initiative?</label>
+                  <label className={classes.sliderLabel}>How many months do you need to achieve your initiative? <sup className='isRequired'>*</sup></label>
                   <Slider
                       value={months}
                       onChange={handleMonthChange}
@@ -238,7 +244,7 @@ export default function FellowApp(props) {
 
                 <TextField
                     id='field_body'
-                    label={<span className={(Object.keys(initiatives).length > 0) ? classes.placeholder : classes.disabled}>How would you spend this {months > 1 ? months + ' months' : months + ' month'} and ${budget}?</span>}
+                    label={<span className={(Object.keys(initiatives).length > 0) ? classes.placeholder : classes.disabled}>How would you spend this {months > 1 ? months + ' months' : months + ' month'} and ${budget}? </span>}
                     helperText={idea.length > 0 ? (4000 - idea.length) + ' / 4000 characters allowed ' : '200 - 4000 characters.'}
                     disabled={(Object.keys(initiatives).length === 0)}
                     type='textarea'
@@ -247,6 +253,7 @@ export default function FellowApp(props) {
                     multiline
                     rows='4'
                     fullWidth
+                    required={true}
                     style={{margin: '65px 0 40px 0'}}
                 />
 
@@ -290,7 +297,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom:0
   },
   subheader: {
-    fontSize:30,
+    fontSize:25,
     marginBottom:0,
     fontWeight:800,
     borderBottom:'1px solid #202020'

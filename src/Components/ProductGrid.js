@@ -23,7 +23,7 @@ const productData = [
     },
     {
         img:"/images/products/goldmilk-board.jpg",
-        title:"golk milk",
+        title:"Gold milk",
         desc:"A product inspired by Sammie's Grandmother's traditional Gold Milk recipe. Gold Milk is a multi-purpose paste created with a fragrant blend of date paste, coconut butter, cardamom, cloves, cinnamon, and single-origin Turmeric sourced through <a\n" +
             "                          target='_blank' rel=\"noopener noreferrer\" href='https://www.diasporaco.com/'>Diaspora Co</a>. All organic ingredients."
     },
@@ -70,20 +70,13 @@ class ProductGrid extends React.Component {
 
         return (
             <Grid container direction='column'>
-                <Grid item>
-                    <FormControlLabel
-                        value={this.state.showDesc}
-                        onChange={e=>this.setState({showDesc : !this.state.showDesc})}
-                        control={<Checkbox color="primary"/>}
-                        label="Read Product Descriptions"
-                        labelPlacement="end" />
-                </Grid>
+                <p>We specialize in labels and packaging from the screen to the shelf</p>
                 <GridList className={classes.gridList}
                           cols={window.innerWidth > 1000 ? 3.5 : ( window.innerWidth > 600 ? 2.5 : 1.5)}
                           cellHeight={window.innerWidth > 1000 ? 220 : ( window.innerWidth > 600 ? 250 : 300)} >
                     {productData.map(tile => (
                         <GridListTile key={tile.img}>
-                            <img src={tile.img} alt={tile.title} />
+                            <div className={classes.bgImage} style={{backgroundImage:'url('+tile.img+')'}}>&nbsp;</div>
                             <GridListTileBar
                                 title={tile.title}
                                 classes={{
@@ -96,6 +89,14 @@ class ProductGrid extends React.Component {
                         </GridListTile>
                     ))}
                 </GridList>
+                <Grid item>
+                    <FormControlLabel
+                        value={this.state.showDesc}
+                        onChange={e=>this.setState({showDesc : !this.state.showDesc})}
+                        control={<Checkbox color="primary"/>}
+                        label="Read Product Descriptions"
+                        labelPlacement="end" />
+                </Grid>
             </Grid>
 
         );
@@ -131,8 +132,13 @@ const styles = theme => ({
         top:0,
         left:0,
         padding:4,
+        fontSize:15,
         textShadow:'0px -1px rgba(121, 121, 121, 0.73)',
         background: 'linear-gradient(to bottom, rgba(255,255,255,.7) 0%, rgba(255,255,255,.7) 50%, rgba(255,255,255,0) 100%)',
+    },
+    bgImage : {
+        width:'100%', height:'100%',
+        backgroundSize:'cover',
     }
 });
 

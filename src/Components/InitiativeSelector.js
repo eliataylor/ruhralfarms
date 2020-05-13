@@ -7,6 +7,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import CardHeader from '@material-ui/core/CardHeader';
 import Avatar from '@material-ui/core/Avatar';
+import Grid from '@material-ui/core/Grid';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
@@ -59,9 +60,17 @@ export default function InitiativeSelector(props) {
 
   if (open === false) {
     return (
-      <div>
+      <Grid container direction='column'>
+        <Grid container justify='space-between'>
+          <Grid item className={classes.placeholder} >Click 3 initiatives you want to work on<sup className='isRequired'>*</sup>
+          </Grid>
+          <Grid item>
+            <Button color='secondary' variant='outlined' onClick={handleClickOpen}>
+              Expand All
+            </Button>
+          </Grid>
+        </Grid>
           <div className={classes.rootList}>
-          <label className={classes.placeholder} >What do you want to work on? <small>(3 max)</small> &nbsp; &nbsp; <small onClick={handleClickOpen}><u>expand all</u></small></label>
           <GridList className={classes.gridList} cols={window.innerWidth > 900 ? 4.5 : 2.5}>
             {props.tileData.map(tile => (
                   <GridListTile
@@ -76,17 +85,21 @@ export default function InitiativeSelector(props) {
               ))}
           </GridList></div>
           {selectedRows}
-          </div>
+          </Grid>
         );
   }
 
   return (
     <Dialog fullScreen open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
       <DialogTitle className={classes.appBar}>
-            <Button color='secondary' variant='contained' className='float-left' onClick={handleClose} aria-label="close">
+        <Grid container justify='space-between'>
+          <Grid item>Select 1, 2 or 3 initiatives for your focus</Grid>
+          <Grid item>
+            <Button color='secondary' variant='contained' onClick={handleClose} aria-label="close">
               Close
             </Button>
-            Select 1, 2 or 3 initiatives for your focus
+          </Grid>
+        </Grid>
       </DialogTitle>
       <DialogContent>
         {selectedRows}
@@ -94,7 +107,7 @@ export default function InitiativeSelector(props) {
         {props.tileData.map(tile => (
               <GridListTile
                 key={tile.img}
-                className={'col-lg-2 col-md-3 col-sm-4 col-6 '  + classes.skillBlockBtn}
+                className={classes.skillBlockBtn}
                 data-initiative={tile.title}
                 onClick={toggleItem}
                 >
@@ -117,7 +130,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom:40
   },
   cardHeader : {
-    padding:0
+    padding:0,
+    marginBottom:15,
   },
   appForm : {
     color:'#202020',
@@ -152,6 +166,7 @@ const useStyles = makeStyles((theme) => ({
     transform: 'translateZ(0)',
   },
   placeholder : {
+    textAlign:'left',
     color:'#202020',
     fontWeight:600
   },
