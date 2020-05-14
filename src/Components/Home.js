@@ -149,7 +149,9 @@ class Home extends React.Component {
                           <Grid item>Our <strong>mission</strong> is to grow with our community by creating sustainable
                               solutions for each other and our environment. </Grid>
                           <Grid item className={classes.lineEmoji}>To fulfill this mission we seek out partnerships over clients, and prioritize
-                              projects that grow our <em>sharing economy</em> <a href='https://en.wikipedia.org/wiki/Sharing_economy' rel="noopener noreferrer"  target='_blank'><img src='/images/sharing-economy.png' alt='sharing economy' /></a>. We believe pooling capital, equity,
+                              projects that grow our <a href='https://en.wikipedia.org/wiki/Sharing_economy' rel="noopener noreferrer"  target='_blank'><img src='/images/sharing-economy.png' alt='sharing economy' /></a> <em>sharing economy</em>.
+                          </Grid>
+                          <Grid item>We believe pooling capital, equity,
                               skills and resources will always deliver the best outcome for everyone.</Grid>
                           <Grid item>If you have a project that could benefit from what we offer, let's <Collaborate cta='join forces'/>.</Grid>
                       </Grid>
@@ -167,9 +169,8 @@ class Home extends React.Component {
 
                       <Grid container spacing={1} style={{marginTop: 30}}>
                           <Grid item xs={6} >
-                              Eli is a full stack developer with 15 years of experience across a wide variety of
-                              technologies. Review more of his work at <a target="_blank" rel="noopener noreferrer"
-                                                                          href="https://taylormadetraffic.com">TaylorMadeTraffic.com</a>
+                              Eli is a full stack software developer with over 15 years of experience across a wide variety of
+                              technologies and industries. Review more of his work at <a target="_blank" rel="noopener noreferrer"  href="https://taylormadetraffic.com">TaylorMadeTraffic.com</a>
                           </Grid>
                           <Grid item xs={6}>
                               <img src='/images/eli-n-charlie.jpg' className='img-fluid' alt='eli'/>

@@ -51,19 +51,16 @@ const tileData = [
   {
     img: 'http://kapunahale.com/wwwroot/photos/projects/59_300x300.jpg',
     title: 'Small Engines',
-    warning: "We're currently seeking mentors for this space\",",
     invest: 'Robot parts, ...?'
   },
   {
     img: 'http://kapunahale.com/wwwroot/photos/projects/51_300x300.jpg',
     title: 'Electric Motors',
-    warning: "We're currently seeking mentors for this space",
-    invest: 'Robot parts, ...?'
+    invest: 'Old electric golf cart, Raspberry PI and robotic control units, ...?'
   },
   {
     img: 'http://kapunahale.com/wwwroot/photos/projects/9_300x300.jpg',
     title: 'Plumbing',
-    warning: 'This trade depends on scheduling availability of our mentors',
     invest: 'Irrigation systems, ...?'
   },
   {
@@ -78,7 +75,6 @@ const tileData = [
   {
     img: '/images/team-diverse.jpg',
     title: 'Languages',
-    warning: "Lucky for you, this trade doesn't cost much. But give us a year or two to host this",
     invest: 'Instruction ...?'
   },
 ];

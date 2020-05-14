@@ -174,7 +174,7 @@ export default function FellowApp(props) {
                 <p>You may apply to live at <a href="https://kapunahale.com" target="_blank" rel="noopener noreferrer">Kapuna
                   Hale</a> or just come to use workspaces as needed from sunrise to sundown.</p>
                 <p>Either way you gain access to it's <strong>6
-                  acres</strong>, <strong>tools</strong>, <strong>workspaces</strong>, <strong style={{cursor:'pointer'}} onClick={e=>toggleMentors(true)}><u>counselors</u></strong> and your awarded budget.
+                  acres</strong>, <strong>tools</strong>, <strong>workspaces</strong>, <strong style={{cursor:'pointer'}} onClick={e=>toggleMentors(true)}><u>counselors</u></strong> and your awarded <strong>budget</strong>.
                 </p>
                 <p>After your tenure you may continue to <strong>use and profit</strong> from the tools and workspaces created during your initiative.</p>
               </Grid>
@@ -205,20 +205,21 @@ export default function FellowApp(props) {
                   <Dialog open={showingMentors} maxWidth={false} fullWidth
                           onClose={e => toggleMentors(false)} fullScreen >
                     <Grid container justify='space-between' className={classes.dialogHead}>
-                      <Grid item >
-                        <em>This is not meant to be summer camp, but we are all available and excited to help your initiative however we can.</em>
+                      <Grid item xs={8} >
+                        <h3>Counselors &amp; Mentors</h3>
                       </Grid>
-                      <Grid item>
+                      <Grid item xs={4} style={{textAlign:'right'}}>
                         <Button color='secondary' variant='contained' onClick={e => toggleMentors(false)}>
                           COLLAPSE
                         </Button>
                       </Grid>
+                      <Grid xs={12} item><em>While this is not a fully supervised camp, we are each available and excited to help your initiative succeed.</em></Grid>
                     </Grid>
                     <Grid container direction='column' style={{padding:'5px 8px'}}>
                       <Counselors brandList={brandList} mentorList={mentorList} />
                     </Grid>
                     <p style={{padding:'30px 8px'}}>
-                      <em>We're also seeking <strong>other professionals</strong> willing to show their expertise. Please <Collaborate cta='reach out' />.</em>
+                      <em>We're also seeking <strong>other professionals</strong> willing to share their expertise. Please <Collaborate cta='reach out' />.</em>
                     </p>
                   </Dialog>
               }
@@ -277,7 +278,18 @@ export default function FellowApp(props) {
                         <MenuItem value={'2020-10'}>Oct 2020</MenuItem>
                         <MenuItem value={'2020-11'}>Nov 2020</MenuItem>
                         <MenuItem value={'2020-12'}>Dec 2020</MenuItem>
-                        <MenuItem value={'2021-12'}>Jan 2021</MenuItem>
+                        <MenuItem value={'2021-01'}>Jan 2021</MenuItem>
+                        <MenuItem value={'2021-02'}>Feb 2021</MenuItem>
+                        <MenuItem value={'2021-03'}>Mar 2021</MenuItem>
+                        <MenuItem value={'2021-04'}>Apr 2021</MenuItem>
+                        <MenuItem value={'2021-05'}>May 2021</MenuItem>
+                        <MenuItem value={'2021-06'}>Jun 2021</MenuItem>
+                        <MenuItem value={'2021-07'}>Jul 2021</MenuItem>
+                        <MenuItem value={'2021-08'}>Aug 2021</MenuItem>
+                        <MenuItem value={'2021-09'}>Sep 2021</MenuItem>
+                        <MenuItem value={'2021-10'}>Oct 2021</MenuItem>
+                        <MenuItem value={'2021-11'}>Nov 2021</MenuItem>
+                        <MenuItem value={'2021-12'}>Dec 2021</MenuItem>
                       </Select>
                       <FormHelperText>All dates depend on us all clear of Covid-19</FormHelperText>
                     </FormControl>

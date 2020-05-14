@@ -17,7 +17,7 @@ class Counselors extends React.Component {
                                 <Grid item xs={12} sm={3} md={4} style={{alignSelf:'flex-start'}}><img className={classes.mentorPhoto} src={mentor.img} alt={mentor.title} /></Grid>
                                 <Grid item xs={12} sm={9} md={8} container spacing={0} >
                                         <Grid item xs={12}><h4>{mentor.title}</h4></Grid>
-                                        <Grid item xs={12}><SanitizedHTML html={mentor.desc}
+                                        <Grid item xs={12} style={{marginBottom:20}}><SanitizedHTML html={mentor.desc}
                                                    allowedTags={['b', 'i', 'em', 'strong', 'a']}
                                                   allowedAttributes={{'a': ['href', 'target']}}/></Grid>
                                         {mentor.brands.map(brandname => {
