@@ -7,13 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import OverlayLoader from "./OverlayLoader";
-const axios = require('axios').default;
-axios.defaults.headers.common['crossDomain'] = true;
-axios.defaults.headers.common['async'] = true;
-axios.defaults.headers.common['timeout'] = process.env.NODE_ENV === 'production' ? 30 : 0; // for debugging with php breakpoints
-axios.defaults.headers.common['Accept'] = 'application/json';
-axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+import API from '../API';
 
 class Collaborate extends React.Component {
   constructor(props) {
@@ -42,10 +36,7 @@ class Collaborate extends React.Component {
     };
 
     const that = this;
-    // const domain = 'https://portal.ruhralfarms.com'; //
-    const domain = 'https://localhost.ruhralfarms.com'; //
-//    const domain = 'http://ruhralfarms.bukach.me/'; // https://portal.ruhralfarms.com
-    axios.post(domain + '/inquiry/new?_format=json', obj)
+    API.Post('/inquiry/new?_format=json', obj)
       .then(function (response) {
         console.log(response);
         that.setState({loading:false, open:false});

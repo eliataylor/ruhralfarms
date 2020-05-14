@@ -136,7 +136,7 @@ export default function FellowApp(props) {
       "field_description": idea
     };
 
-    axios.post('https://portal.ruhralfarms.com/application/new?_format=json', obj)
+    axios.post('/application/new?_format=json', obj)
         .then(function (response) {
           console.log(response);
           setLoading(false);
@@ -168,7 +168,7 @@ export default function FellowApp(props) {
                 <h2 className={classes.subheader}>Our Mission</h2>
                 <p style={{fontStyle: 'italic'}}><strong>Our mission</strong> is to enrich our community, through
                   sharing hands, minds, hearts and resources.</p>
-                <p>We pledge $5,000 for 2020 and $10,000 for 2021 to invest in projects with shared benefits for you and our home. Want a mobile fruit stand for farmers markets? A pottery wheel and kiln? A 26" portal sawmill? So do we!</p>
+                <p>We pledge $5,000 for 2020 and $10,000 for 2021 to invest in projects with shared benefits for you and our home. Want a mobile fruit stand for farmers markets? A pottery wheel and kiln? A 26" portable sawmill? So do we!</p>
                 <p>Propose your project. If we can fund it, we will; and share all tools and produce in turn.</p>
                 <h2 className={classes.subheader}>Your Benefits</h2>
                 <p>You may apply to live at <a href="https://kapunahale.com" target="_blank" rel="noopener noreferrer">Kapuna
@@ -301,7 +301,7 @@ export default function FellowApp(props) {
                 </Grid>
 
                 <Grid item className={classes.appSlider}>
-                  <label className={classes.sliderLabel}>What is the baseline budget to achieve your initiative? <sup className='isRequired'>*</sup></label>
+                  <label className={classes.sliderLabel}>What is the baseline budget? <sup className='isRequired'>*</sup></label>
                   <Slider
                       value={budget}
                       valueLabelFormat={valueLabelFormat}
@@ -318,7 +318,7 @@ export default function FellowApp(props) {
                 </Grid>
 
                 <Grid item className={classes.appSlider}>
-                  <label className={classes.sliderLabel}>How many months do you need to achieve your initiative? <sup className='isRequired'>*</sup></label>
+                  <label className={classes.sliderLabel}>How many months do you need? <sup className='isRequired'>*</sup></label>
                   <Slider
                       value={months}
                       onChange={handleMonthChange}

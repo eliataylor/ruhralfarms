@@ -26,17 +26,17 @@ const tileData = [
   {
     img: 'http://kapunahale.com/wwwroot/photos/projects/8_300x300.jpg',
     title: 'Landscape Design',
-    invest: 'Pavers, rock cinders, and starter plants or trees, ...? + a photoshoot and website build your online presence and portfolio!'
+    invest: 'Pavers, rock cinders, and starter plants or trees, + a photoshoot and website for your portfolio?'
   },
   {
     img: '/images/kh/sammie-caters-A.png',
     title: 'Catering',
-    invest: 'Mobile Clay oven, drop freezers, refrigerators, appliances, ...?'
+    invest: 'Mobile Clay oven, Mobile BBQ / Kitchen, drop freezers, appliances, ...?'
   },
   {
     img: 'http://kapunahale.com/wwwroot/photos/projects/IMG_0174_300x300.jpg',
     title: 'Interior Design',
-    invest: 'Rolling privacy walls for the 1400 square foot lanai, ...? + a photoshoot and website build your online presence and portfolio!',
+    invest: 'Rolling privacy walls for the 1400 square foot lanai, + a photoshoot and website for your portfolio?',
   },
   {
     img: 'http://kapunahale.com/wwwroot/photos/projects/20170602_144257_300x300.jpg',
@@ -66,7 +66,8 @@ const tileData = [
   {
     img: '/images/kh/concrete-firepit.jpg',
     title: 'Masonry',
-    invest: 'Cement mixer, Hand trucks, ...?'},
+    invest: 'Cement mixer, Hand trucks, ...?'
+  },
   {
     img: '/images/team-music.jpg',
     title: 'Music',
