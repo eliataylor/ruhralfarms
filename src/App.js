@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Home from './Components/Home';
 import FellowApp from './Components/FellowApp';
+import Counselors from "./Components/Counselors";
 
 const tileData = [
   {
@@ -108,6 +109,9 @@ export default function App() {
         </Route>
         <Route path="/">
           <Home tileData={tileData}  />
+        </Route>
+        <Route path="/counselors">
+          <Counselors tileData={tileData}  />
         </Route>
       </Switch>
   </Router>

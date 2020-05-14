@@ -61,11 +61,11 @@ export default function InitiativeSelector(props) {
   if (open === false) {
     return (
       <Grid container direction='column'>
-        <Grid container justify='space-between'>
+        <Grid container justify='space-between' wrap='nowrap'>
           <Grid item className={classes.placeholder} >Click 3 initiatives you want to work on<sup className='isRequired'>*</sup>
           </Grid>
           <Grid item>
-            <Button color='secondary' variant='outlined' onClick={handleClickOpen}>
+            <Button style={{marginBottom:4}}  color='secondary' variant='outlined' onClick={handleClickOpen}>
               Expand All
             </Button>
           </Grid>
@@ -92,10 +92,10 @@ export default function InitiativeSelector(props) {
   return (
     <Dialog fullScreen open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
       <DialogTitle className={classes.appBar}>
-        <Grid container justify='space-between'>
+        <Grid container justify='space-between' wrap='nowrap'>
           <Grid item>Select 1, 2 or 3 initiatives for your focus</Grid>
           <Grid item>
-            <Button color='secondary' variant='contained' onClick={handleClose} aria-label="close">
+            <Button style={{marginBottom:4}} color='secondary' variant='contained' onClick={handleClose} aria-label="close">
               Close
             </Button>
           </Grid>
@@ -156,6 +156,7 @@ const useStyles = makeStyles((theme) => ({
   },
   rootList: {
     display: 'flex',
+    width:'100%',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden'

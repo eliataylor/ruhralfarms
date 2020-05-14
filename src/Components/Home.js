@@ -60,7 +60,7 @@ class Home extends React.Component {
               <Grid container spacing={1} style={{marginBottom:40}}>
 
                   <Grid item sm={4} >
-                      <p>We welcome hosting side-by-side work sprints at our workspace in <strong>Oakland, California</strong> or the Garden Island of <strong>Kauai</strong>.</p>
+                      <p>We welcome side-by-side work sprints at our workspace in <strong>Oakland, California</strong> or the Garden Island of <strong>Kauai</strong>.</p>
                   </Grid>
                   <Grid item sm={8} >
                       <a rel="noopener noreferrer" href="http://sammietaylor.com/design" target="_blank">
@@ -121,7 +121,7 @@ class Home extends React.Component {
                       <p>We welcome hosting side-by-side work sprints at our workspaces, and we love a good excuse to travel.</p>
                       <Grid container spacing={1} style={{marginTop:40}}>
                           <Grid item xs={12} sm={4}>
-                              <h3 style={{margin:0}}>Oakland, California</h3>
+                              <h4 style={{margin:0}}>Oakland, California</h4>
                               Is our homebase for developing the software and network necessary to
                               connect and exchange solutions around the whole world.
                           </Grid>
@@ -134,7 +134,7 @@ class Home extends React.Component {
                               <img src="/images/kh-office.jpg" className='img-fluid w-100' alt='kapuna hale garage'/>
                           </Grid>
                           <Grid item xs={12} sm={4}>
-                              <h3 style={{margin:0}}>Kilauea, Kauai</h3>
+                              <h4 style={{margin:0}}>Kilauea, Kauai</h4>
                               <a target="_blank" rel="noopener noreferrer" href="https://kapunahale.com">Kapuna
                                   Hale</a> is our creative workspace to grow solutions from soil and sweat equity.
                           </Grid>

@@ -11,14 +11,72 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
-// import Mentors from "./Mentors";
 import OverlayLoader from "./OverlayLoader";
+import Dialog from "@material-ui/core/Dialog";
+import Counselors from "./Counselors";
+import Collaborate from "./Collaborate";
+
 const axios = require('axios').default;
 axios.defaults.headers.common['crossDomain'] = true;
 axios.defaults.headers.common['async'] = true;
 axios.defaults.headers.common['timeout'] = process.env.NODE_ENV === 'production' ? 30 : 0; // for debugging with php breakpoints
 axios.defaults.headers.common['Accept'] = 'application/json';
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+
+
+const brandList = {
+  'Kapuna Hale' : {
+    'img':'http://kapunahale.com/wwwroot/img/tree-round-blk.png',
+    'title':'Kapuna Hale',
+    'desc':"<a href='http://kapunahale.com' target='_blank'>Cooperative &amp; Community Living</a>",
+    'mentors':['Gene Taylor']
+  },
+  'Ruhral' : {
+    'img':'//cdn.shopify.com/s/files/1/1630/5941/files/Ruhrallogodesign2018_195x.png',
+    'title':'ruhral.com',
+    'desc':"<a href='http://ruhral.com' target='_blank' ><em>Wellness products with a worldwide return</em></a>",
+    'mentors':['Samanta Khalil']
+  },
+   'Sammie Taylor' : {
+      'img':'http://sammietaylor.com/favicon_rounded.png',
+      'title':'SammieTaylor.com',
+      'desc':"<a href='http://sammietaylor.com' target='_blank'><em>Product and Experience Design</em></a>",
+      'mentors':['Samanta Khalil']
+  },
+   'Track Authority Music' : {
+       'img':'https://trackauthoritymusic.com/favicon.ico',
+       'title':'Track Authority Music',
+       'desc':"<a href='http://trackauthoritymusic.com' target='_blank'><em>Rewarding Musical Tastes</em></a>",
+       'mentors':['Eli Taylor']
+   },
+  'Taylor Made Traffic' : {
+    'img':'http://taylormadetraffic.com/wwwroot/images/TMM_Logo_flat.png',
+    'title':'Taylor Made Traffic',
+    'desc':"<a href='http://taylormadetraffic.com' target='_blank'><em>Application Engineering</em></a>",
+    'mentors':['Eli Taylor']
+  }
+}
+
+const mentorList = {
+  'Gene Taylor': {
+    img: "/images/kh-office-shaka.jpg",
+    title: 'Gene Taylor',
+    desc: "I always thought my son was never listening",
+    brands: ['Kapuna Hale']
+  },
+  'Samanta Khalil': {
+    img:"/images/sammie-morocco.jpg",
+    title:'Samanta Khalil',
+    desc: "I love my husband.",
+    brands: ['Sammie Taylor', 'Ruhral']
+  },
+  'Eli Taylor': {
+    img: "/images/eli-in-tangier.jpg",
+    title: 'Eli Taylor',
+    desc: "I have a weird obsession with organizing people's garages.",
+    brands: ['Track Authority Music', 'Taylor Made Traffic']
+  }
+}
 
 
 export default function FellowApp(props) {
@@ -33,6 +91,7 @@ export default function FellowApp(props) {
   const [mail, setEmail] = React.useState('');
   const [housing, setHousingType] = React.useState('');
   const [isLoading, setLoading] = React.useState(false);
+  const [showingMentors, toggleMentors] = React.useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -115,16 +174,11 @@ export default function FellowApp(props) {
                 <p>You may apply to live at <a href="https://kapunahale.com" target="_blank" rel="noopener noreferrer">Kapuna
                   Hale</a> or just come to use workspaces as needed from sunrise to sundown.</p>
                 <p>Either way you gain access to it's <strong>6
-                  acres</strong>, <strong>tools</strong>, <strong>workspaces</strong>, and <strong>mentors</strong> and your awarded budget.
+                  acres</strong>, <strong>tools</strong>, <strong>workspaces</strong>, <strong style={{cursor:'pointer'}} onClick={e=>toggleMentors(true)}><u>counselors</u></strong> and your awarded budget.
                 </p>
                 <p>After your tenure you may continue to <strong>use and profit</strong> from the tools and workspaces created during your initiative.</p>
-                <p>The following organizations have offered their time and support to help make your initiative a success. Click the logos to read more about their mentors</p>
               </Grid>
             </Grid>
-
-            <p style={{margin:'30px 0 40px 0', textAlign:'center', fontWeight:800, width:'100%'}}>
-              [mentor logos]
-            </p>
 
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
@@ -138,14 +192,36 @@ export default function FellowApp(props) {
               </Grid>
               <Grid item xs={12} md={6}>
                 <h2 className={classes.subheader}>Mutual Expectations</h2>
-                <p>Once we come to an understanding and agreement for your initiative, we will sign a contract for you
-                  meeting your own monthly milestones towards completing your initiative.</p>
-                <p>Your enrollment and residence, as well as your continued access after, is contingent on meeting these
-                  milestones.</p>
+                <p>If your application is awarded, we will work together on establishing the
+                  milestones necessary to succeed in your initiative.</p>
+                <p>Your enrollment and residence, as well as your continued access thereafter, is <strong>contingent on meeting your
+                  milestones</strong>.</p>
                 <p>You are free to seek or hold employment and encouraged to stay active outside of your initiative
                   through fitness and fun.</p>
               </Grid>
             </Grid>
+
+              {showingMentors === false ? '' :
+                  <Dialog open={showingMentors} maxWidth={false} fullWidth
+                          onClose={e => toggleMentors(false)} fullScreen >
+                    <Grid container justify='space-between' className={classes.dialogHead}>
+                      <Grid item >
+                        <em>This is not meant to be summer camp, but we are all available and excited to help your initiative however we can.</em>
+                      </Grid>
+                      <Grid item>
+                        <Button color='secondary' variant='contained' onClick={e => toggleMentors(false)}>
+                          COLLAPSE
+                        </Button>
+                      </Grid>
+                    </Grid>
+                    <Grid container direction='column' style={{padding:'5px 8px'}}>
+                      <Counselors brandList={brandList} mentorList={mentorList} />
+                    </Grid>
+                    <p style={{padding:'30px 8px'}}>
+                      <em>We're also seeking <strong>other professionals</strong> willing to show their expertise. Please <Collaborate cta='reach out' />.</em>
+                    </p>
+                  </Dialog>
+              }
 
             <form action="https://portal.ruhralfarms.com/application/new" method="POST" className={classes.appForm + " container-fluid p-0 mt-5"} >
                 <h1>Application</h1>
@@ -189,7 +265,7 @@ export default function FellowApp(props) {
                   </Grid>
                   <Grid item xs={6} >
                     <FormControl fullWidth className="mt-4">
-                      <InputLabel id="when2start">Select when you'd like to start <sup className='isRequired'>*</sup></InputLabel>
+                      <InputLabel id="when2start">Your ideal start date <sup className='isRequired'>*</sup></InputLabel>
                       <Select
                           id="when2start"
                           name="field_period"
@@ -208,7 +284,9 @@ export default function FellowApp(props) {
                   </Grid>
                 </Grid>
 
+                <Grid container >
                 <InitiativeSelector onChange={initiativeChange} tileData={props.tileData}/>
+                </Grid>
 
                 <Grid item className={classes.appSlider}>
                   <label className={classes.sliderLabel}>What is the baseline budget to achieve your initiative? <sup className='isRequired'>*</sup></label>
@@ -277,6 +355,11 @@ const useStyles = makeStyles((theme) => ({
     borderBottom:'1px solid #202020',
     marginBottom:40,
     width:'100%'
+  },
+  dialogHead : {
+    backgroundColor:'#202020',
+    padding:'4px 8px',
+    color:theme.palette.primary.light
   },
   appBar : {
     backgroundColor:'#202020',

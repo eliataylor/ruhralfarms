@@ -42,7 +42,8 @@ class Collaborate extends React.Component {
     };
 
     const that = this;
-    const domain = 'https://portal.ruhralfarms.com'; //
+    // const domain = 'https://portal.ruhralfarms.com'; //
+    const domain = 'https://localhost.ruhralfarms.com'; //
 //    const domain = 'http://ruhralfarms.bukach.me/'; // https://portal.ruhralfarms.com
     axios.post(domain + '/inquiry/new?_format=json', obj)
       .then(function (response) {
