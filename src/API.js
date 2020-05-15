@@ -1,7 +1,7 @@
 import axios from 'axios';
 const Config = {
     'api' : {
-        timeout : process.env.NODE_ENV === 'production' ? 30 : 0,
+        timeout : process.env.NODE_ENV === 'production' ? 3000 : 0,
         base: 'https://portal.ruhralfarms.com'
 //    base : 'http://ruhralfarms.bukach.me',
 //    base : 'https://localhost.ruhralfarms.com',
@@ -12,7 +12,7 @@ class API {
     constructor() {
         axios.defaults.headers.common['timeout'] = Config.api.timeout; // for debugging with php breakpoints
         axios.defaults.headers.common['Accept'] = 'application/json';
-        axios.defaults.headers.common['Access-Control-Max-Age'] = 3200;
+        // axios.defaults.headers.common['Access-Control-Max-Age'] = -1;
         axios.defaults.headers.post['Content-Type'] = 'application/json';
         this.requester = axios.create({
             baseURL: Config.api.base,
@@ -20,8 +20,8 @@ class API {
             params: {'_format': 'json'}
         });
     }
+
     Get (path) {
-        // console.log('Get to '+path);
         return this.requester.get(path);
     }
 

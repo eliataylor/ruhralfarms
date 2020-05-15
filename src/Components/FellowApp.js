@@ -28,31 +28,36 @@ const brandList = {
   'Kapuna Hale' : {
     'img':'http://kapunahale.com/wwwroot/img/tree-round-blk.png',
     'title':'Kapuna Hale',
-    'desc':"<a href='http://kapunahale.com' target='_blank'>Cooperative &amp; Community Living</a>",
+    'link':'http://kapunahale.com',
+    'desc':"Cooperative &amp; Community Living",
     'mentors':['Gene Taylor']
   },
   'Ruhral' : {
     'img':'//cdn.shopify.com/s/files/1/1630/5941/files/Ruhrallogodesign2018_195x.png',
     'title':'ruhral.com',
-    'desc':"<a href='http://ruhral.com' target='_blank' ><em>Wellness products with a worldwide return</em></a>",
+    'link':'http://ruhral.com',
+    'desc':"Wellness products with a worldwide return",
     'mentors':['Samanta Khalil']
   },
    'Sammie Taylor' : {
       'img':'http://sammietaylor.com/favicon_rounded.png',
       'title':'SammieTaylor.com',
-      'desc':"<a href='http://sammietaylor.com' target='_blank'><em>Product and Experience Design</em></a>",
+      'link':'http://sammietaylor.com',
+      'desc':"Product and Experience Design",
       'mentors':['Samanta Khalil']
   },
    'Track Authority Music' : {
        'img':'https://trackauthoritymusic.com/favicon.ico',
        'title':'Track Authority Music',
-       'desc':"<a href='http://trackauthoritymusic.com' target='_blank'><em>Rewarding Musical Tastes</em></a>",
+       'link':'http://trackauthoritymusic.com',
+       'desc':"Rewarding Musical Tastes",
        'mentors':['Eli Taylor']
    },
   'Taylor Made Traffic' : {
     'img':'http://taylormadetraffic.com/wwwroot/images/TMM_Logo_flat.png',
     'title':'Taylor Made Traffic',
-    'desc':"<a href='http://taylormadetraffic.com' target='_blank'><em>Application Engineering</em></a>",
+    'link' : 'http://taylormadetraffic.com',
+    'desc':"Application Engineering",
     'mentors':['Eli Taylor']
   }
 }
@@ -61,13 +66,13 @@ const mentorList = {
   'Gene Taylor': {
     img: "/images/kh-office-shaka.jpg",
     title: 'Gene Taylor',
-    desc: "I always thought my son was never listening",
+    desc: "Promoting win-wins",
     brands: ['Kapuna Hale']
   },
   'Samanta Khalil': {
     img:"/images/sammie-morocco.jpg",
     title:'Samanta Khalil',
-    desc: "I love my husband.",
+    desc: "Part time hippie",
     brands: ['Sammie Taylor', 'Ruhral']
   },
   'Eli Taylor': {

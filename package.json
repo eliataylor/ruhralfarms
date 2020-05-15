@@ -10,6 +10,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "node-sass": "^4.14.1",
+    "notistack": "^0.9.13",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
@@ -20,7 +21,7 @@
   },
   "scripts": {
     "prestart": "(cat ruhralfarms.crt ruhralfarms.key > ./node_modules/webpack-dev-server/ssl/server.pem) || :",
-    "start": "HOST=localhost.ruhralfarms.com react-scripts start",
+    "start": "HOST=localhost.ruhralfarms.com HTTPS=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

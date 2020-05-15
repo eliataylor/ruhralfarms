@@ -12,6 +12,9 @@ private.md
 
 /public/images/baks
 
+*.crt
+*.key
+
 # testing
 /coverage
 

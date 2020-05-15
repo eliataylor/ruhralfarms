@@ -6,6 +6,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Home from './Components/Home';
 import FellowApp from './Components/FellowApp';
 import Counselors from "./Components/Counselors";
+import { SnackbarProvider } from 'notistack';
 
 const tileData = [
   {
@@ -99,19 +100,21 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-    <Router>
-      <Switch>
-        <Route path="/red-dirt-coworkers">
-          <FellowApp tileData={tileData} />
-        </Route>
-        <Route path="/">
-          <Home tileData={tileData}  />
-        </Route>
-        <Route path="/counselors">
-          <Counselors tileData={tileData}  />
-        </Route>
-      </Switch>
-  </Router>
+      <SnackbarProvider maxSnack={3}>
+      <Router>
+        <Switch>
+          <Route path="/red-dirt-coworkers">
+            <FellowApp tileData={tileData} />
+          </Route>
+          <Route path="/">
+            <Home tileData={tileData}  />
+          </Route>
+          <Route path="/counselors">
+            <Counselors tileData={tileData}  />
+          </Route>
+        </Switch>
+    </Router>
+    </SnackbarProvider>
     </ThemeProvider>
   );
 }

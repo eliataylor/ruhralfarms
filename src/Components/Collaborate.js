@@ -8,6 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import OverlayLoader from "./OverlayLoader";
 import API from '../API';
+import { withSnackbar } from 'notistack';
 
 class Collaborate extends React.Component {
   constructor(props) {
@@ -15,6 +16,10 @@ class Collaborate extends React.Component {
     this.state = {open:false, loading:false, name:'', mail:'', field_mvp_budget:'', field_ideal_budget:'', field_idea:'', field_description:''};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    window.defaultAnalytics.logEvent('page_view', {page_title : this.props.cta || 'Collaborate'});
   }
 
   handleChange(e) {
@@ -39,10 +44,12 @@ class Collaborate extends React.Component {
     API.Post('/inquiry/new?_format=json', obj)
       .then(function (response) {
         console.log(response);
+        that.props.enqueueSnackbar('Message received!');
         that.setState({loading:false, open:false});
       })
       .catch(function (error) {
         console.log(error);
+        that.props.enqueueSnackbar('Message failed!');
         that.setState({loading:false, open:false});
       });
 
@@ -162,4 +169,4 @@ class Collaborate extends React.Component {
 
 }
 
-export default Collaborate;
+export default withSnackbar(Collaborate);

@@ -19,6 +19,7 @@ export default function InitiativeSelector(props) {
 
   const handleClickOpen = () => {
     setOpen(true);
+    window.defaultAnalytics.logEvent('page_view', {page_title : 'All Initiatives'});
   };
 
   const handleClose = () => {
@@ -29,10 +30,15 @@ export default function InitiativeSelector(props) {
     var copy = {...initiatives};
     var id = e.currentTarget.getAttribute('data-initiative');
     if (typeof initiatives[id] !== 'undefined') {
+      window.defaultAnalytics.logEvent('remove_from_cart', {value : id});
       delete copy[id];
       setInitiatives(copy);
     } else {
-      if (Object.keys(copy).length >= 3) return false;
+      if (Object.keys(copy).length >= 3) {
+        window.defaultAnalytics.logEvent('add_to_wishlist', {value : id});
+        return false;
+      }
+      window.defaultAnalytics.logEvent('add_to_cart', {value : id});
       copy[id] = true;
       setInitiatives(copy);
     }

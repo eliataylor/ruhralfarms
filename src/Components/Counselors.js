@@ -1,10 +1,13 @@
 import React from 'react';
 import {withStyles} from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import SanitizedHTML from 'react-sanitized-html';
 import CardHeader from "@material-ui/core/CardHeader";
 
 class Counselors extends React.Component {
+
+    componentDidMount() {
+        window.defaultAnalytics.logEvent('page_view', {page_title : 'Counselors'});
+    }
 
     render() {
         const { classes } = this.props;
@@ -17,21 +20,18 @@ class Counselors extends React.Component {
                                 <Grid item xs={12} sm={3} md={4} style={{alignSelf:'flex-start'}}><img className={classes.mentorPhoto} src={mentor.img} alt={mentor.title} /></Grid>
                                 <Grid item xs={12} sm={9} md={8} container spacing={0} >
                                         <Grid item xs={12}><h4>{mentor.title}</h4></Grid>
-                                        <Grid item xs={12} style={{marginBottom:20}}><SanitizedHTML html={mentor.desc}
-                                                   allowedTags={['b', 'i', 'em', 'strong', 'a']}
-                                                  allowedAttributes={{'a': ['href', 'target']}}/></Grid>
+                                        <Grid item xs={12} style={{marginBottom:20}}>{mentor.desc}</Grid>
                                         {mentor.brands.map(brandname => {
                                             const brand = this.props.brandList[brandname];
                                             if (!brand) return true;
                                             return (<Grid key={brandname} item xs={12} sm={6} >
+                                                <a href={brand.link} target='_blank'  rel="noopener noreferrer">
                                                 <CardHeader
                                                 className={classes.brandHead}
                                                 avatar={<img src={brand.img} className={classes.brandLogo} alt={brand.title} />}
                                                 title={brand.title}
-                                                subheader={<SanitizedHTML html={brand.desc}
-                                                          allowedTags={['b', 'i', 'em', 'strong', 'a']}
-                                                          allowedAttributes={{'a': ['href', 'target']}} />
-                                                } />
+                                                subheader={brand.desc} />
+                                                </a>
                                             </Grid>)
                                         })}
                                 </Grid>

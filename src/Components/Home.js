@@ -29,7 +29,7 @@ class Home extends React.Component {
             </header>
             <div className='d-flex w-100 justify-content-around flex-wrap'>
               <div className="col-6 col-md-3 p-1"><a href="#applications" onClick={this.scrollTo} className='sqCta' style={{ backgroundImage:'url(/images/radialarm.jpg)'}}>APPLICATIONS</a></div>
-              <div className="col-6 col-md-3 p-1"><a href="#products" onClick={this.scrollTo} className='sqCta' style={{ backgroundImage:'url(http://sammietaylor.com/assets/archives/branding/j__Creative-direction-for-branding.jpg)'}}>PRODUCTS</a></div>
+              <div className="col-6 col-md-3 p-1"><a href="#products" onClick={this.scrollTo} className='sqCta' style={{ backgroundImage:'url(//sammietaylor.com/assets/archives/branding/j__Creative-direction-for-branding.jpg)'}}>PRODUCTS</a></div>
               <div className="col-6 col-md-3 p-1"><a href="#workspaces" onClick={this.scrollTo} className='sqCta' style={{backgroundImage:'url(/images/kh-reddirt.jpg)'}}>WORKSPACES</a></div>
               <div className="col-6 col-md-3 p-1"><a href="#initiatives" onClick={this.scrollTo} className='sqCta' style={{backgroundImage:'url(/images/ruhralfarmszamana.png)'}}>INITIATIVES</a></div>
             </div>
