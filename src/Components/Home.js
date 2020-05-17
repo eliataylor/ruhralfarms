@@ -63,7 +63,7 @@ class Home extends React.Component {
                       <p>We welcome side-by-side work sprints at our workspace in <strong>Oakland, California</strong> or the Garden Island of <strong>Kauai</strong>.</p>
                   </Grid>
                   <Grid item sm={8} >
-                      <a rel="noopener noreferrer" href="http://sammietaylor.com/design" target="_blank">
+                      <a rel="noopener noreferrer" href="https://sammietaylor.com/design" target="_blank">
                           <img src="//sammietaylor.com/assets/archives/UI-UX/j__UX-mike.png" className='img-fluid w-100' alt='technology'/>
                           <small className='reviewTag'>Review project</small>
                       </a>
@@ -72,7 +72,7 @@ class Home extends React.Component {
 
               <Grid container spacing={1} style={{marginBottom:40}} >
                   <Grid item sm={8}>
-                      <a rel="noopener noreferrer" href="http://taylormadetraffic.com/projects?pid=47" target="_blank">
+                      <a rel="noopener noreferrer" href="https://taylormadetraffic.com/projects?pid=47" target="_blank">
                           <img src="/images/radialarm_short.jpg" className='img-fluid w-100' alt='technology'/>
                           <small className='reviewTag'>Review project</small>
                       </a>
@@ -89,7 +89,7 @@ class Home extends React.Component {
 
               <Grid container spacing={1} alignItems='flex-start'>
                   <Grid item xs={6} sm={3} >
-                      <a rel="noopener noreferrer" href="http://sammietaylor.com/case-studies/farm-fresh"
+                      <a rel="noopener noreferrer" href="https://sammietaylor.com/case-studies/farm-fresh"
                          target="_blank">
                           <img src="/images/farmfreshphones.png" className='img-fluid w-100' alt='technology'/>
                           <small className='reviewTag'>Review project</small>
@@ -100,7 +100,7 @@ class Home extends React.Component {
                       <p>Whatever your needs, click {<Collaborate />} and let us know how we can help your team or vision.</p>
                   </Grid>
                   <Grid item xs={6} sm={3} >
-                      <a rel="noopener noreferrer" href="http://taylormadetraffic.com/projects?pid=46" target="_blank">
+                      <a rel="noopener noreferrer" href="https://taylormadetraffic.com/projects?pid=46" target="_blank">
                           <img src="/images/flc_collage.png" className='img-fluid w-100' alt='autonomous'/>
                           <small className='reviewTag'>Review project</small>
                       </a>

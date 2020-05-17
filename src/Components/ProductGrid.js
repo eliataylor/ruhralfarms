@@ -19,7 +19,7 @@ const productData = [
         title:"tumeric face scrub",
         desc:"All-Natural Turmeric Face Mask + Scrub. Our Scrub is formulated with organic Turmeric sourced from Northern Thailand. Turmeric is considered nature's most powerful herb with anti-inflammatory, anti-oxidant, anti-bacterial, and anti-aging properties. 10% of each sale of this product was donated to <a\n" +
             "                          target='_blank' rel=\"noopener noreferrer\"\n" +
-            "                          href='http://www.warmheartworldwide.com/'>www.warmheartworldwide.com</a>."
+            "                          href='https://www.warmheartworldwide.com/'>www.warmheartworldwide.com</a>."
     },
     {
         img:"/images/products/goldmilk-board.jpg",

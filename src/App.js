@@ -10,74 +10,88 @@ import { SnackbarProvider } from 'notistack';
 
 const tileData = [
   {
-    img: 'http://kapunahale.com/wwwroot/photos/projects/20170528_111110_300x300.jpg',
+    img: 'https://kapunahale.com/wwwroot/photos/projects/20170528_111110_300x300.jpg',
     title: 'Propogation',
-    invest: 'Hydroponic cloners, raised nursery beds, air pumps, ...?'
+    invest: 'Hydroponic cloners, raised nursery beds, air pumps...?',
+    plan: 'Take 50%+ of produce to market'
   },
   {
     img: '/images/kh/kh-permaculture.jpg',
     title: 'Permaculture',
-    invest: 'Starter plants, trees and soils, ...?'
+    invest: 'Starter plants, trees and soils, ...?',
+    plan: 'Take 50%+ of produce to market'
   },
   {
-    img: 'http://kapunahale.com/wwwroot/photos/projects/16_300x300.jpg',
+    img: 'https://kapunahale.com/wwwroot/photos/projects/16_300x300.jpg',
     title: 'Horticulture',
-    invest: 'Starter plants, trees, soils, tillers, ground covers, irrigation systems, ...?'
+    invest: 'Starter plants, trees, soils, tillers, ground covers, irrigation systems, ...?',
+    plan: 'Take 50%+ of produce to market'
   },
   {
-    img: 'http://kapunahale.com/wwwroot/photos/projects/8_300x300.jpg',
+    img: 'https://kapunahale.com/wwwroot/photos/projects/8_300x300.jpg',
     title: 'Landscape Design',
-    invest: 'Pavers, rock cinders, and starter plants or trees, + a photoshoot and website for your portfolio?'
+    invest: 'Pavers, rock cinders, and starter plants or trees, a photoshoot and website for your portfolio, ...?',
+    plan: 'Start your own landscaping business'
   },
   {
     img: '/images/kh/sammie-caters-A.png',
     title: 'Catering',
-    invest: 'Mobile Clay oven, Mobile BBQ / Kitchen, drop freezers, appliances, ...?'
+    invest: 'Mobile Clay oven, Mobile BBQ / Kitchen, drop freezers, appliances, ...?',
+    plan: 'Start a mobile catering company'
   },
   {
-    img: 'http://kapunahale.com/wwwroot/photos/projects/IMG_0174_300x300.jpg',
+    img: 'https://kapunahale.com/wwwroot/photos/projects/IMG_0174_300x300.jpg',
     title: 'Interior Design',
-    invest: 'Rolling privacy walls for the 1400 square foot lanai, + a photoshoot and website for your portfolio?',
+    invest: 'Turn our 1400 square foot lanai into a yoga and fitness space, + a photoshoot and website for your portfolio?',
+    plan: 'Start your interior design business'
   },
   {
-    img: 'http://kapunahale.com/wwwroot/photos/projects/20170602_144257_300x300.jpg',
+    img: 'https://kapunahale.com/wwwroot/photos/projects/20170602_144257_300x300.jpg',
     title: 'Carpentry',
-    invest: 'CNC machine, sawmill, laser cutter?'
+    invest: 'CNC machine, sawmill, laser etcher / cutter, ...?',
+    plan: 'Build and sell crafts, cabinets, or services'
   },
   {
-    img: 'http://kapunahale.com/wwwroot/photos/projects/20141026_131414_300x300.jpg',
+    img: 'https://kapunahale.com/wwwroot/photos/projects/20141026_131414_300x300.jpg',
     title: 'Construction',
-    invest: 'Mobile stage or kiosk, portable sawmill, ...?'
+    invest: 'Mobile stage or kiosk, portable sawmill, ...?',
+    plan: 'Start a event production business, milling service, or just build your portfolio and experience'
   },
   {
-    img: 'http://kapunahale.com/wwwroot/photos/projects/59_300x300.jpg',
-    title: 'Small Engines',
-    invest: 'Robot parts, ...?'
+    img: 'https://kapunahale.com/wwwroot/photos/projects/59_300x300.jpg',
+    title: 'Combustion Engines',
+    invest: 'Parts and materials for restoration projects',
+    plan:'Restore and resell cars, trucks and machinery'
   },
   {
-    img: 'http://kapunahale.com/wwwroot/photos/projects/51_300x300.jpg',
+    img: 'https://kapunahale.com/wwwroot/photos/projects/51_300x300.jpg',
     title: 'Electric Motors',
-    invest: 'Old electric golf cart, Raspberry PI and robotic control units, ...?'
+    invest: 'Old electric golf cart, tractors, refrigerators',
+    plan:'Rebuild and resell tools and appliances with solar powered motors'
   },
   {
-    img: 'http://kapunahale.com/wwwroot/photos/projects/9_300x300.jpg',
+    img: 'https://kapunahale.com/wwwroot/photos/projects/9_300x300.jpg',
     title: 'Plumbing',
-    invest: 'Irrigation systems, ...?'
+    invest: 'Water catchment systems, farm irrigation systems, ...?',
+    plan:'Start your plumbing business'
   },
   {
     img: '/images/kh/concrete-firepit.jpg',
     title: 'Masonry',
-    invest: 'Cement mixer, Hand trucks, ...?'
+    invest: 'Cement mixer, Hand trucks, ...?',
+    plan:'Build and sell stone and cement Art, building services'
   },
   {
     img: '/images/team-music.jpg',
     title: 'Music',
-    invest: 'Recording studio, instruments, mixing tools, ...?'
+    invest: 'Recording studio, instruments, mixing tools, ...?',
+    plan:'Record, release, and market an album'
   },
   {
     img: '/images/team-diverse.jpg',
     title: 'Languages',
-    invest: 'Instruction ...?'
+    invest: 'Instruction and event promotion',
+    plan:'Host language exchange events'
   },
 ];
 

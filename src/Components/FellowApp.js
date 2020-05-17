@@ -15,48 +15,43 @@ import OverlayLoader from "./OverlayLoader";
 import Dialog from "@material-ui/core/Dialog";
 import Counselors from "./Counselors";
 import Collaborate from "./Collaborate";
-
-const axios = require('axios').default;
-axios.defaults.headers.common['crossDomain'] = true;
-axios.defaults.headers.common['async'] = true;
-axios.defaults.headers.common['timeout'] = process.env.NODE_ENV === 'production' ? 30 : 0; // for debugging with php breakpoints
-axios.defaults.headers.common['Accept'] = 'application/json';
-axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-
+import { useSnackbar } from 'notistack';
+import API from "../API";
+import TextEditor from "./TextEditor";
 
 const brandList = {
   'Kapuna Hale' : {
-    'img':'http://kapunahale.com/wwwroot/img/tree-round-blk.png',
+    'img':'https://kapunahale.com/wwwroot/img/tree-round-blk.png',
     'title':'Kapuna Hale',
-    'link':'http://kapunahale.com',
-    'desc':"Cooperative &amp; Community Living",
+    'link':'https://kapunahale.com',
+    'desc':"Cooperative & Community Living",
     'mentors':['Gene Taylor']
   },
   'Ruhral' : {
     'img':'//cdn.shopify.com/s/files/1/1630/5941/files/Ruhrallogodesign2018_195x.png',
     'title':'ruhral.com',
-    'link':'http://ruhral.com',
+    'link':'https://ruhral.com',
     'desc':"Wellness products with a worldwide return",
     'mentors':['Samanta Khalil']
   },
    'Sammie Taylor' : {
-      'img':'http://sammietaylor.com/favicon_rounded.png',
+      'img':'https://sammietaylor.com/favicon_rounded.png',
       'title':'SammieTaylor.com',
-      'link':'http://sammietaylor.com',
+      'link':'https://sammietaylor.com',
       'desc':"Product and Experience Design",
       'mentors':['Samanta Khalil']
   },
    'Track Authority Music' : {
        'img':'https://trackauthoritymusic.com/favicon.ico',
        'title':'Track Authority Music',
-       'link':'http://trackauthoritymusic.com',
+       'link':'https://trackauthoritymusic.com',
        'desc':"Rewarding Musical Tastes",
        'mentors':['Eli Taylor']
    },
   'Taylor Made Traffic' : {
-    'img':'http://taylormadetraffic.com/wwwroot/images/TMM_Logo_flat.png',
+    'img':'https://taylormadetraffic.com/wwwroot/images/TMM_Logo_flat.png',
     'title':'Taylor Made Traffic',
-    'link' : 'http://taylormadetraffic.com',
+    'link' : 'https://taylormadetraffic.com',
     'desc':"Application Engineering",
     'mentors':['Eli Taylor']
   }
@@ -76,10 +71,10 @@ const mentorList = {
     brands: ['Sammie Taylor', 'Ruhral']
   },
   'Eli Taylor': {
-    img: "/images/eli-in-tangier.jpg",
+    img: "/images/kh-office.jpg",
     title: 'Eli Taylor',
     desc: "I have a weird obsession with organizing people's garages.",
-    brands: ['Track Authority Music', 'Taylor Made Traffic']
+    brands: ['Taylor Made Traffic', 'Track Authority Music']
   }
 }
 
@@ -89,14 +84,16 @@ export default function FellowApp(props) {
   const classes = useStyles();
   const [budget, setBudget] = React.useState(500);
   const [months, setMonths] = React.useState(1);
-  const [idea, setIdea] = React.useState('');
   const [initiatives, setInitiatives] = React.useState({});
   const [startDate, setStartDate] = React.useState('');
   const [fullname, setName] = React.useState('');
   const [mail, setEmail] = React.useState('');
+  const [idea, setIdea] = React.useState('');
   const [housing, setHousingType] = React.useState('');
   const [isLoading, setLoading] = React.useState(false);
   const [showingMentors, toggleMentors] = React.useState(false);
+
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -109,10 +106,6 @@ export default function FellowApp(props) {
 
   const handleMonthChange = (event, newValue) => {
     setMonths(newValue);
-  };
-
-  const handleIdeaChange = (event) => {
-    setIdea(event.target.value);
   };
 
   const initiativeChange = (items) => {
@@ -129,27 +122,34 @@ export default function FellowApp(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (startDate === '') {
+      return enqueueSnackbar('Please select your ideal start month', {variant:'error'});
+    }
     setLoading(true);
 
     const obj = {
       "mail": mail,
       "name": fullname,
+      "field_start_date" : startDate,
       "field_type": housing,
-      "field_initiatives": initiatives,
+      "field_initiatives": Object.keys(initiatives),
       "field_budget": budget,
       "field_duration": months,
-      "field_description": idea
+      "field_idea": idea
     };
 
-    axios.post('/application/new?_format=json', obj)
-        .then(function (response) {
-          console.log(response);
-          setLoading(false);
-        })
-        .catch(function (error) {
-          console.log(error);
-          setLoading(false);
-        });
+    API.Post('/application/new?_format=json', obj)
+      .then(function (response) {
+        console.log(response);
+        enqueueSnackbar('Message received.', {variant:'success'});
+        setLoading(false);
+      })
+      .catch(function (error) {
+        console.log(error);
+        var err = API.getErrorMsg(error);
+        enqueueSnackbar(err, {variant:'error'});
+        setLoading(false);
+      });
 
     return false;
   }
@@ -218,13 +218,13 @@ export default function FellowApp(props) {
                           COLLAPSE
                         </Button>
                       </Grid>
-                      <Grid xs={12} item><em>While this is not a fully supervised camp, we are each available and excited to help your initiative succeed.</em></Grid>
+                      <Grid xs={12} item><em>While not offering full time supervision, we are each available and excited to help your initiative succeed.</em></Grid>
                     </Grid>
                     <Grid container direction='column' style={{padding:'5px 8px'}}>
                       <Counselors brandList={brandList} mentorList={mentorList} />
                     </Grid>
                     <p style={{padding:'30px 8px'}}>
-                      <em>We're also seeking <strong>other professionals</strong> willing to share their expertise. Please <Collaborate cta='reach out' />.</em>
+                      <em>We're also seeking other <strong>local professionals</strong> willing to share their expertise. Please <Collaborate cta='reach out' />.</em>
                     </p>
                   </Dialog>
               }
@@ -232,132 +232,128 @@ export default function FellowApp(props) {
             <form action="https://portal.ruhralfarms.com/application/new" method="POST" className={classes.appForm + " container-fluid p-0 mt-5"} >
                 <h1>Application</h1>
 
-                <Grid container justify='space-between' spacing={1} alignItems='center' style={{marginBottom:40}}>
-                  <Grid item xs={6}>
-                    <TextField
-                        label='Your full name'
-                        autoComplete='true'
-                        name='fullname'
-                        fullWidth
-                        required={true}
-                        onChange={e => setName(e.currentTarget.value)}
-                        type='email'
-                    />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <TextField
-                        autoComplete='true'
-                        name='mail'
-                        fullWidth
-                        label='Your email'
-                        required={true}
-                        onChange={e => setEmail(e.currentTarget.value)}
-                        type='email'
-                    />
-                  </Grid>
-                  <Grid item xs={6} >
-                    <FormControl fullWidth style={{marginTop:0}}>
-                      <InputLabel id="housing">Housing Preference</InputLabel>
-                      <Select
-                          fullWidth
-                          id="housing"
-                          name="field_type"
-                          value={housing}
-                          onChange={e => setHousingType(e.target.value)} >
-                        <MenuItem value=''>No Preference</MenuItem>
-                        <MenuItem value='fellow'>Live at Kapuna Hale while co-working</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Grid>
-                  <Grid item xs={6} >
-                    <FormControl fullWidth className="mt-4">
-                      <InputLabel id="when2start">Your ideal start date <sup className='isRequired'>*</sup></InputLabel>
-                      <Select
-                          id="when2start"
-                          name="field_period"
-                          label='Start Timeframe'
-                          value={startDate}
-                          required={true}
-                          fullWidth
-                          onChange={handleStartChange}>
-                        <MenuItem value={'2020-10'}>Oct 2020</MenuItem>
-                        <MenuItem value={'2020-11'}>Nov 2020</MenuItem>
-                        <MenuItem value={'2020-12'}>Dec 2020</MenuItem>
-                        <MenuItem value={'2021-01'}>Jan 2021</MenuItem>
-                        <MenuItem value={'2021-02'}>Feb 2021</MenuItem>
-                        <MenuItem value={'2021-03'}>Mar 2021</MenuItem>
-                        <MenuItem value={'2021-04'}>Apr 2021</MenuItem>
-                        <MenuItem value={'2021-05'}>May 2021</MenuItem>
-                        <MenuItem value={'2021-06'}>Jun 2021</MenuItem>
-                        <MenuItem value={'2021-07'}>Jul 2021</MenuItem>
-                        <MenuItem value={'2021-08'}>Aug 2021</MenuItem>
-                        <MenuItem value={'2021-09'}>Sep 2021</MenuItem>
-                        <MenuItem value={'2021-10'}>Oct 2021</MenuItem>
-                        <MenuItem value={'2021-11'}>Nov 2021</MenuItem>
-                        <MenuItem value={'2021-12'}>Dec 2021</MenuItem>
-                      </Select>
-                      <FormHelperText>All dates depend on us all clear of Covid-19</FormHelperText>
-                    </FormControl>
-                  </Grid>
-                </Grid>
-
-                <Grid container >
+                <Grid container className="mt-5" >
                 <InitiativeSelector onChange={initiativeChange} tileData={props.tileData}/>
                 </Grid>
 
-                <Grid item className={classes.appSlider}>
-                  <label className={classes.sliderLabel}>What is the baseline budget? <sup className='isRequired'>*</sup></label>
-                  <Slider
-                      value={budget}
-                      valueLabelFormat={valueLabelFormat}
-                      onChange={handleBudgetChange}
-                      aria-labelledby='months needed'
-                      name="field_budget"
-                      step={500}
-                      marks
-                      required={true}
-                      min={500}
-                      max={5000}
-                      valueLabelDisplay='on'
-                  />
-                </Grid>
+              {Object.keys(initiatives).length ===0 ?
+                  ''
+                  :
+                  <div id='page2'>
+                    <Grid item className={classes.appSlider}>
+                      <label className={classes.sliderLabel}>What is the baseline budget? <sup className='isRequired'>*</sup></label>
+                      <Slider
+                          value={budget}
+                          valueLabelFormat={valueLabelFormat}
+                          onChange={handleBudgetChange}
+                          aria-labelledby='months needed'
+                          name="field_budget"
+                          step={500}
+                          marks
+                          required={true}
+                          min={500}
+                          max={5000}
+                          valueLabelDisplay='on'
+                      />
+                    </Grid>
 
-                <Grid item className={classes.appSlider}>
-                  <label className={classes.sliderLabel}>How many months do you need? <sup className='isRequired'>*</sup></label>
-                  <Slider
-                      value={months}
-                      onChange={handleMonthChange}
-                      aria-labelledby='months'
-                      name="field_months"
-                      step={1}
-                      marks
-                      min={1}
-                      max={12}
-                      valueLabelDisplay='on'
-                  />
-                </Grid>
+                    <Grid item className={classes.appSlider}>
+                      <label className={classes.sliderLabel}>How many months do you need? <sup className='isRequired'>*</sup></label>
+                      <Slider
+                          value={months}
+                          onChange={handleMonthChange}
+                          aria-labelledby='months'
+                          name="field_months"
+                          step={1}
+                          marks
+                          min={1}
+                          max={12}
+                          valueLabelDisplay='on'
+                      />
+                    </Grid>
 
-                <TextField
-                    id='field_body'
-                    label={<span className={(Object.keys(initiatives).length > 0) ? classes.placeholder : classes.disabled}>How would you spend this {months > 1 ? months + ' months' : months + ' month'} and ${budget}? </span>}
-                    helperText={idea.length > 0 ? (4000 - idea.length) + ' / 4000 characters allowed ' : '200 - 4000 characters.'}
-                    disabled={(Object.keys(initiatives).length === 0)}
-                    type='textarea'
-                    value={idea}
-                    onChange={handleIdeaChange}
-                    multiline
-                    rows='4'
-                    fullWidth
-                    required={true}
-                    style={{margin: '65px 0 40px 0'}}
-                />
+                    <Grid item>
+                      <label className={classes.placeholder}>How would you spend this {months > 1 ? months + ' months' : months + ' month'} and ${budget}?</label>
+                      <TextEditor onChange={setIdea}/>
+                      <p className='MuiFormHelperText-root'>{idea.length > 0 ? (4000 - idea.length) + ' / 4000 characters allowed ' : '200 - 4000 characters.'}</p>
+                    </Grid>
 
-                <Grid item>
-                  <Button color='primary' type="submit" onClick={handleSubmit} variant='contained'
-                          disabled={(Object.keys(initiatives).length === 0)}>
-                    Submit
-                  </Button>
-                </Grid>
+                    <Grid container justify='space-between' spacing={1} alignItems='center' style={{marginBottom:40}}>
+                      <Grid item xs={6}>
+                        <TextField
+                            label='Your full name'
+                            autoComplete='true'
+                            name='fullname'
+                            fullWidth
+                            required={true}
+                            onChange={e => setName(e.currentTarget.value)}
+                            type='email'
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <TextField
+                            autoComplete='true'
+                            name='mail'
+                            fullWidth
+                            label='Your email'
+                            required={true}
+                            onChange={e => setEmail(e.currentTarget.value)}
+                            type='email'
+                        />
+                      </Grid>
+                      <Grid item xs={6} >
+                        <FormControl fullWidth style={{marginTop:0}}>
+                          <InputLabel id="housing">Housing Preference</InputLabel>
+                          <Select
+                              fullWidth
+                              id="housing"
+                              name="field_type"
+                              value={housing}
+                              onChange={e => setHousingType(e.target.value)} >
+                            <MenuItem value=''>No Preference</MenuItem>
+                            <MenuItem value='fellow'>Live at Kapuna Hale while co-working</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </Grid>
+                      <Grid item xs={6} >
+                        <FormControl fullWidth className="mt-4">
+                          <InputLabel id="when2start">Your ideal start date <sup className='isRequired'>*</sup></InputLabel>
+                          <Select
+                              id="when2start"
+                              name="field_start_date"
+                              label='Start Timeframe'
+                              value={startDate}
+                              required={true}
+                              fullWidth
+                              onChange={handleStartChange}>
+                            <MenuItem value={'2020-10-01'}>Oct 2020</MenuItem>
+                            <MenuItem value={'2020-11-01'}>Nov 2020</MenuItem>
+                            <MenuItem value={'2020-12-01'}>Dec 2020</MenuItem>
+                            <MenuItem value={'2021-01-01'}>Jan 2021</MenuItem>
+                            <MenuItem value={'2021-02-01'}>Feb 2021</MenuItem>
+                            <MenuItem value={'2021-03-01'}>Mar 2021</MenuItem>
+                            <MenuItem value={'2021-04-01'}>Apr 2021</MenuItem>
+                            <MenuItem value={'2021-05-01'}>May 2021</MenuItem>
+                            <MenuItem value={'2021-06-01'}>Jun 2021</MenuItem>
+                            <MenuItem value={'2021-07-01'}>Jul 2021</MenuItem>
+                            <MenuItem value={'2021-08-01'}>Aug 2021</MenuItem>
+                            <MenuItem value={'2021-09-01'}>Sep 2021</MenuItem>
+                            <MenuItem value={'2021-10-01'}>Oct 2021</MenuItem>
+                            <MenuItem value={'2021-11-01'}>Nov 2021</MenuItem>
+                            <MenuItem value={'2021-12-01'}>Dec 2021</MenuItem>
+                          </Select>
+                          <FormHelperText>All dates depend on us all clear of Covid-19</FormHelperText>
+                        </FormControl>
+                      </Grid>
+                    </Grid>
+                    <Grid item>
+                      <Button color='primary' type="submit" onClick={handleSubmit} variant='contained'
+                              disabled={(Object.keys(initiatives).length === 0)}>
+                        SAVE
+                      </Button>
+                    </Grid>
+                  </div>
+              }
             </form>
           </Grid>
         </Grid>
@@ -391,7 +387,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appSlider : {
     textAlign:'right',
-    margin:'65px 0 0 0'
+    margin:'55px 0 25px 0'
   },
   sliderLabel : {
     marginBottom:0
@@ -403,8 +399,9 @@ const useStyles = makeStyles((theme) => ({
     borderBottom:'1px solid #202020'
   },
   placeholder : {
+    textAlign:'left',
     color:'#202020',
-    fontWeight:500
+    fontWeight:600
   },
   disabled : {
     color:'rgba(0, 0, 0, 0.38)',

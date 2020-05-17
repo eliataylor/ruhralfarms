@@ -55,7 +55,8 @@ export default function InitiativeSelector(props) {
                 title={
                   <div>
                     <small>investment <em>ideas</em></small>
-                    <p>{tile.invest}</p>
+                    <div>{tile.invest}</div>
+                    <strong>{tile.plan}</strong>
                   </div>
                 }
                 subheader={tile.warning ? tile.warning : ''}
@@ -68,7 +69,8 @@ export default function InitiativeSelector(props) {
     return (
       <Grid container direction='column'>
         <Grid container justify='space-between' wrap='nowrap'>
-          <Grid item className={classes.placeholder} >Click 3 initiatives you want to work on<sup className='isRequired'>*</sup>
+          <Grid item className={classes.placeholder} >
+            Click up to 3 initiatives you want to focus on<sup className='isRequired'>*</sup>
           </Grid>
           <Grid item>
             <Button style={{marginBottom:4}}  color='secondary' variant='outlined' onClick={handleClickOpen}>

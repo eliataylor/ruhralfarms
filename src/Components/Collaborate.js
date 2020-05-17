@@ -44,12 +44,13 @@ class Collaborate extends React.Component {
     API.Post('/inquiry/new?_format=json', obj)
       .then(function (response) {
         console.log(response);
-        that.props.enqueueSnackbar('Message received!');
+        that.props.enqueueSnackbar('Message received.', {variant:'success'});
         that.setState({loading:false, open:false});
       })
       .catch(function (error) {
         console.log(error);
-        that.props.enqueueSnackbar('Message failed!');
+        var err = API.getErrorMsg(error);
+        that.props.enqueueSnackbar(err, {variant:'error'});
         that.setState({loading:false, open:false});
       });
 
@@ -141,7 +142,7 @@ class Collaborate extends React.Component {
               </div>
             </div>
             <TextField
-                label={<span>How can <em>we</em> help?</span>}
+                label={<span>How can we work together?</span>}
                 type="textarea"
                 multiline
                 name="field_description"
