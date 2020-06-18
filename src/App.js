@@ -11,21 +11,21 @@ import { SnackbarProvider } from 'notistack';
 const tileData = [
   {
     img: 'https://kapunahale.com/wwwroot/photos/projects/20170528_111110_300x300.jpg',
-    title: 'Propogation',
+    title: 'Propagation',
     invest: 'Hydroponic cloners, raised nursery beds, air pumps...?',
-    plan: 'Take 50%+ of produce to market'
+    plan: 'Take ~75% of produce to market'
   },
   {
     img: '/images/kh/kh-permaculture.jpg',
     title: 'Permaculture',
     invest: 'Starter plants, trees and soils, ...?',
-    plan: 'Take 50%+ of produce to market'
+    plan: 'Take ~75% of produce to market'
   },
   {
     img: 'https://kapunahale.com/wwwroot/photos/projects/16_300x300.jpg',
     title: 'Horticulture',
     invest: 'Starter plants, trees, soils, tillers, ground covers, irrigation systems, ...?',
-    plan: 'Take 50%+ of produce to market'
+    plan: 'Take ~75% of produce to market'
   },
   {
     img: 'https://kapunahale.com/wwwroot/photos/projects/8_300x300.jpg',
@@ -92,8 +92,10 @@ const tileData = [
     title: 'Languages',
     invest: 'Instruction and event promotion',
     plan:'Host language exchange events'
-  },
+  }
 ];
+
+// TOOD: add "Fitness", "Software?"
 
 export default function App() {
 

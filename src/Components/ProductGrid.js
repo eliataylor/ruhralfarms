@@ -85,7 +85,7 @@ class ProductGrid extends React.Component {
                                 }}
                             />
                             {this.state.showDesc === true ?
-                            <Grid className={classes.floatDesc}><SanitizedHTML html={tile.desc}  allowedTags={[ 'b', 'i', 'em', 'strong', 'a' ]}  allowedAttributes={{'a': ['href']}}  /></Grid> : ''}
+                            <Grid  className={classes.floatDesc}><SanitizedHTML html={tile.desc}  allowedTags={[ 'b', 'i', 'em', 'strong', 'a' ]}  allowedAttributes={{'a': ['href']}}  /></Grid> : ''}
                         </GridListTile>
                     ))}
                 </GridList>

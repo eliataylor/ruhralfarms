@@ -70,7 +70,7 @@ export default function InitiativeSelector(props) {
       <Grid container direction='column'>
         <Grid container justify='space-between' wrap='nowrap'>
           <Grid item className={classes.placeholder} >
-            Click up to 3 initiatives you want to focus on<sup className='isRequired'>*</sup>
+            First, click up to 3 initiatives you want to focus on<sup className='isRequired'>*</sup>
           </Grid>
           <Grid item>
             <Button style={{marginBottom:4}}  color='secondary' variant='outlined' onClick={handleClickOpen}>
@@ -111,7 +111,7 @@ export default function InitiativeSelector(props) {
       </DialogTitle>
       <DialogContent>
         {selectedRows}
-        <GridList>
+        <GridList cols={window.innerWidth > 900 ? 4 : ((window.innerWidth > 600) ? 3 : 2)}>
         {props.tileData.map(tile => (
               <GridListTile
                 key={tile.img}

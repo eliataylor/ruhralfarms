@@ -32,14 +32,14 @@ const brandList = {
     'title':'ruhral.com',
     'link':'https://ruhral.com',
     'desc':"Wellness products with a worldwide return",
-    'mentors':['Samanta Khalil']
+    'mentors':['Samanta Khalil Taylor']
   },
    'Sammie Taylor' : {
       'img':'https://sammietaylor.com/favicon_rounded.png',
       'title':'SammieTaylor.com',
       'link':'https://sammietaylor.com',
       'desc':"Product and Experience Design",
-      'mentors':['Samanta Khalil']
+      'mentors':['Samanta Khalil Taylor']
   },
    'Track Authority Music' : {
        'img':'https://trackauthoritymusic.com/favicon.ico',
@@ -54,6 +54,13 @@ const brandList = {
     'link' : 'https://taylormadetraffic.com',
     'desc':"Application Engineering",
     'mentors':['Eli Taylor']
+  },
+  'Garden Island Handyman' : {
+    'img':'/images/garden-island-handyman.png',
+    'title':'Garden Island Handyman',
+    'link' : 'https://www.gardenislandhandyman.com/',
+    'desc':"Contractors with craftsmanship",
+    'mentors':['Ayal Zeindeld']
   }
 }
 
@@ -75,6 +82,12 @@ const mentorList = {
     title: 'Eli Taylor',
     desc: "I have a weird obsession with organizing people's garages.",
     brands: ['Taylor Made Traffic', 'Track Authority Music']
+  },
+  'Ayal Zeindeld': {
+    img: "/images/ayal.jpg",
+    title: 'Ayal Zeindeld',
+    desc: "Craftsman",
+    brands: ['Garden Island Handyman']
   }
 }
 
@@ -173,8 +186,31 @@ export default function FellowApp(props) {
                 <h2 className={classes.subheader}>Our Mission</h2>
                 <p style={{fontStyle: 'italic'}}><strong>Our mission</strong> is to enrich our community, through
                   sharing hands, minds, hearts and resources.</p>
-                <p>We pledge $5,000 for 2020 and $10,000 for 2021 to invest in projects with shared benefits for you and our home. Want a mobile fruit stand for farmers markets? A pottery wheel and kiln? A 26" portable sawmill? So do we!</p>
-                <p>Propose your project. If we can fund it, we will; and share all tools and produce in turn.</p>
+                <p>We pledge $5,000 for 2020 and $10,000 for 2021 to invest in projects with shared benefits for you and our home.
+                  Want a mobile fruit stand for farmers markets?
+                  How about a mobile catering kitchen?
+                  Want to start a line of tiny homes, work studios, or kiosks?
+                  So do we!
+                  Could you throw the pots for our nursery with a fresh new ceramics studio and kiln?
+                  Could you lead a fitness bootcamp built from bamboo over 6 acres?
+                  What could we do with our Mahogany forest if we had a 26" portable sawmill?
+                </p>
+                <p>Propose your project. If we can fund it, we will; and share all tools purchased, produce grown, and workspaces curated in turn.</p>
+              </Grid>
+            </Grid>
+
+            <Grid container spacing={2} wrap='wrap-reverse'>
+              <Grid item xs={12} sm={6}>
+                <h2 className={classes.subheader}>Mutual Expectations</h2>
+                <p>Our goal is to find win-win investments for Kapuna Hale, as well as assist in your personal &amp; professional development.</p>
+                <p>Before your application and budget is awarded, we will sign a work-trade agreement around
+                  the milestones necessary to succeed in your initiative. </p>
+                <p>Your enrollment, access and/or residence during and after your tenure, is entirely <strong>contingent on meeting your
+                  milestones</strong>.</p>
+                <p>You are free to seek or hold employment and encouraged to stay active outside of your initiative
+                  through fitness and fun.</p>
+              </Grid>
+              <Grid item xs={12} sm={6}>
                 <h2 className={classes.subheader}>Your Benefits</h2>
                 <p>You may apply to live at <a href="https://kapunahale.com" target="_blank" rel="noopener noreferrer">Kapuna
                   Hale</a> or just come to use workspaces as needed from sunrise to sundown.</p>
@@ -185,8 +221,14 @@ export default function FellowApp(props) {
               </Grid>
             </Grid>
 
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={6}>
+            <Grid container spacing={2} wrap='wrap-reverse'>
+              <Grid item xs={12} sm={6}>
+                <h2 className={classes.subheader}>Application Process</h2>
+                <p>1. Submit a few investment ideas for Kapuna Hale, and personal or professional developments goals for yourself.</p>
+                <p>2. If we feel there's a match, and a complimentary <u style={{cursor:'pointer'}} onClick={e=>toggleMentors(true)}>counselor</u> available for your timeframe,
+                  we will work together to establish an agreement around your milestones.</p>
+              </Grid>
+              <Grid item xs={12} sm={6}>
                 <h2 className={classes.subheader} style={{textAlign: 'left'}}>Minimum Qualifications</h2>
                 <p>On your first day...</p>
                 <ul>
@@ -195,16 +237,8 @@ export default function FellowApp(props) {
                   <li>You will have a High School Diploma with at least a 2.5 cumulative GPA over any two years</li>
                 </ul>
               </Grid>
-              <Grid item xs={12} md={6}>
-                <h2 className={classes.subheader}>Mutual Expectations</h2>
-                <p>If your application is awarded, we will work together on establishing the
-                  milestones necessary to succeed in your initiative.</p>
-                <p>Your enrollment and residence, as well as your continued access thereafter, is <strong>contingent on meeting your
-                  milestones</strong>.</p>
-                <p>You are free to seek or hold employment and encouraged to stay active outside of your initiative
-                  through fitness and fun.</p>
-              </Grid>
             </Grid>
+
 
               {showingMentors === false ? '' :
                   <Dialog open={showingMentors} maxWidth={false} fullWidth
@@ -231,7 +265,6 @@ export default function FellowApp(props) {
 
             <form action="https://portal.ruhralfarms.com/application/new" method="POST" className={classes.appForm + " container-fluid p-0 mt-5"} >
                 <h1>Application</h1>
-
                 <Grid container className="mt-5" >
                 <InitiativeSelector onChange={initiativeChange} tileData={props.tileData}/>
                 </Grid>
@@ -349,7 +382,7 @@ export default function FellowApp(props) {
                     <Grid item>
                       <Button color='primary' type="submit" onClick={handleSubmit} variant='contained'
                               disabled={(Object.keys(initiatives).length === 0)}>
-                        SAVE
+                        SUBMIT
                       </Button>
                     </Grid>
                   </div>

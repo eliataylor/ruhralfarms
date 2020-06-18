@@ -60,7 +60,7 @@ class Home extends React.Component {
               <Grid container spacing={1} style={{marginBottom:40}}>
 
                   <Grid item sm={4} >
-                      <p>We welcome side-by-side work sprints at our workspace in <strong>Oakland, California</strong> or the Garden Island of <strong>Kauai</strong>.</p>
+                      <p>We welcome side-by-side sprints at our workspaces in <strong>Oakland, California</strong> and the Garden Island of <strong>Kauai</strong>.</p>
                   </Grid>
                   <Grid item sm={8} >
                       <a rel="noopener noreferrer" href="https://sammietaylor.com/design" target="_blank">
@@ -80,7 +80,7 @@ class Home extends React.Component {
 
                   <Grid item sm={4} container direction='column' justify='space-between' style={{height:'100%'}}>
 
-                      <p>We love a good excuse to travel for anything from ideation to implementation.</p>
+                      <p>We love a good excuse to <strong>travel</strong> for anything from ideation to implementation.</p>
                       <p>We connect <strong>worldwide</strong> with distributed teams through all channels and tools including <em>Slack</em>, <em>Hangouts</em>, <em>Jira</em>, <em>Invision</em>, <em>Figma</em>, <em>Spreadsheets</em>, <em>Github</em> and more</p>
                   </Grid>
 
@@ -118,7 +118,7 @@ class Home extends React.Component {
           <Grid container direction={'column'} className='container' id="workspaces">
                       <div onClick={this.scrollTo} href='#home' className='backToTop'>back to top</div>
                       <h1>OUR WORKSPACES</h1>
-                      <p>We welcome hosting side-by-side work sprints at our workspaces, and we love a good excuse to travel.</p>
+                      <p>We welcome hosting side-by-side sprints at our workspaces, and we love a good excuse to travel.</p>
                       <Grid container spacing={1} style={{marginTop:40}}>
                           <Grid item xs={12} sm={4}>
                               <h4 style={{margin:0}}>Oakland, California</h4>
@@ -157,7 +157,7 @@ class Home extends React.Component {
                       </Grid>
 
                       <Grid container spacing={1} style={{marginTop:40}}>
-                          <Grid item xs={6}>
+                          <Grid item xs={6} >
                               <img src='/images/sammie-smiles.jpg' className='img-fluid' alt='sammie'/>
                           </Grid>
                           <Grid item xs={6} >
@@ -172,8 +172,8 @@ class Home extends React.Component {
                               Eli is a full stack software developer with over 15 years of experience across a wide variety of
                               technologies and industries. Review more of his work at <a target="_blank" rel="noopener noreferrer"  href="https://taylormadetraffic.com">TaylorMadeTraffic.com</a>
                           </Grid>
-                          <Grid item xs={6}>
-                              <img src='/images/eli-n-charlie.jpg' className='img-fluid' alt='eli'/>
+                          <Grid item xs={6} >
+                              <img src='/images/eli-chainsaw.jpg' className='img-fluid' alt='eli'/>
                           </Grid>
                       </Grid>
           </Grid>
