@@ -13,19 +13,19 @@ const tileData = [
     img: 'https://kapunahale.com/wwwroot/photos/projects/20170528_111110_300x300.jpg',
     title: 'Propagation',
     invest: 'Hydroponic cloners, raised nursery beds, air pumps...?',
-    plan: 'Take ~75% of produce to market'
+    plan: 'Take ~75% of produce to market, leave us with the rest'
   },
   {
     img: '/images/kh/kh-permaculture.jpg',
     title: 'Permaculture',
     invest: 'Starter plants, trees and soils, ...?',
-    plan: 'Take ~75% of produce to market'
+    plan: 'Take ~75% of produce to market, leave us with the rest'
   },
   {
     img: 'https://kapunahale.com/wwwroot/photos/projects/16_300x300.jpg',
     title: 'Horticulture',
     invest: 'Starter plants, trees, soils, tillers, ground covers, irrigation systems, ...?',
-    plan: 'Take ~75% of produce to market'
+    plan: 'Take ~75% of produce to marke, leave us with the restt'
   },
   {
     img: 'https://kapunahale.com/wwwroot/photos/projects/8_300x300.jpg',
