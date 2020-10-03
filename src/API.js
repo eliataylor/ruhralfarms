@@ -3,9 +3,9 @@ const Config = {
     'api' : {
         timeout : process.env.NODE_ENV === 'production' ? 3000 : 0,
         base: '//portal.ruhralfarms.com'
-//        base : 'https://34.105.110.195'
-//    base : 'https://ruhralfarms.bukach.me',
-//    base : 'https://localhost.ruhralfarms.com'
+        //    base : 'https://34.105.110.195'
+        //    base : 'https://ruhralfarms.bukach.me',
+        //    base : 'https://localhost.ruhralfarms.com'
     }
 }
 class API {
